@@ -4,7 +4,7 @@ A web app for personalized swiping and liking
 
 ## Credits
 
-*   This app makes heavy use of the Jflame Jquery plugin. Check it out at https://github.com/do-web/jflame 
+*   This app makes heavy use of the JTinder Jquery plugin. Check it out at https://github.com/do-web/jTinder 
 
 ## Technology used
 

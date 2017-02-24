@@ -1,13 +1,13 @@
 /**
- * jflame initialization
+ * jTinder initialization
  */
 
 var currentPane = 5;
 
-var JflameDivID = "#flameslide";
-var currentPane = $(">ul>li", JflameDivID).length;
+var JTinderDivID = "#Tinderslide";
+var currentPane = $(">ul>li", JTinderDivID).length;
 
-$(JflameDivID).jflame({
+$(JTinderDivID).jTinder({
 	// dislike callback
     onDislike: function (item) {
 	    // set the status text
@@ -28,11 +28,11 @@ $(JflameDivID).jflame({
 });
 
 /**
- * Set button action to trigger jflame like & dislike.
+ * Set button action to trigger jTinder like & dislike.
  */
 $('.actions .dislike').click(function(e){
 	e.preventDefault();
-	$("#flameslide").jflame($(this).attr('class'));
+	$("#Tinderslide").jTinder($(this).attr('class'));
 });
 
 $('.actions .like').click(function(e){
@@ -42,7 +42,7 @@ $('.actions .like').click(function(e){
 	$("#john-image").attr("src","/img/pane/john".concat(currentPane,".jpg"));
 	$("#matchModal").show();
 
-	//trigger the Jflame to update the next image
-	//$("#flameslide").jflame($(this).attr('class'));
+	//trigger the JTinder to update the next image
+	//$("#Tinderslide").jTinder($(this).attr('class'));
 });
 

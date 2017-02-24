@@ -22,7 +22,7 @@ body {
     position: relative;
 }
 
-#flameslide {
+#Tinderslide {
     background: #fff;
     margin-left: auto;
     margin-right: auto;
@@ -33,14 +33,14 @@ body {
     position: absolute;
 }
 
-#flameslide ul {
+#Tinderslide ul {
     margin: 0;
     position: relative;
     display: block;
     height: 100%;
 }
 
-#flameslide li {
+#Tinderslide li {
     display: block;
     width: 100%;
     height: 100%;
@@ -69,7 +69,7 @@ body {
 }
 
 /* Image text */
-#flameslide li h2 {
+#Tinderslide li h2 {
     color: #fff;
     font-size: 30px;
     text-align: center;
@@ -81,7 +81,7 @@ body {
 }
 
 /* Image rotation */
-#flameslide li.pane1 {
+#Tinderslide li.pane1 {
     -webkit-transform: rotate(-1deg);
     -moz-transform: rotate(-1deg);
     -o-transform: rotate(-1deg);
@@ -89,7 +89,7 @@ body {
     transform: rotate(-1deg);
 }
 
-#flameslide li.pane2 {
+#Tinderslide li.pane2 {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
     -o-transform: rotate(2deg);
@@ -98,8 +98,8 @@ body {
 }
 
 /* Like & dislike badge images */
-#flameslide .like,
-#flameslide .dislike {
+#Tinderslide .like,
+#Tinderslide .dislike {
     background: url("../img/liked.png") no-repeat scroll 0 0;
     opacity: 0;
     height: 80px;
@@ -118,14 +118,14 @@ body {
     backface-visibility: hidden;
 }
 
-#flameslide .dislike {
+#Tinderslide .dislike {
     right: 45px;
     left: auto;
     background: url("../img/nope.png") no-repeat scroll 0 0;
 }
 
 /* Image container */
-#flameslide .img {
+#Tinderslide .img {
     height: 100%;
     width: 100%;
     margin-bottom: 5px;
@@ -202,29 +202,29 @@ body {
   background: #f5f5f5;
 }
 
-/* jflame images */
-#flameslide .pane5 .img {
+/* jTinder images */
+#Tinderslide .pane5 .img {
     background: url("../img/pane/pane5.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#flameslide .pane4 .img {
+#Tinderslide .pane4 .img {
     background: url("../img/pane/pane4.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#flameslide .pane3 .img {
+#Tinderslide .pane3 .img {
     background: url("../img/pane/pane3.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#flameslide .pane2 .img {
+#Tinderslide .pane2 .img {
     background: url("../img/pane/pane2.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#flameslide .pane1 .img {
+#Tinderslide .pane1 .img {
     background: url("../img/pane/pane1.jpg") no-repeat scroll center center;
     background-size: cover;
 }
 
-/* jflame status text */
+/* jTinder status text */
 #status {
     text-align: center;
     font-size: 18px;
