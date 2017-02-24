@@ -1,0 +1,11 @@
+# Welcome to Jinder
+
+A web app for personalized swiping and liking
+
+## Credits
+
+*   This app makes heavy use of the Jflame Jquery plugin. Check it out at https://github.com/do-web/jflame 
+
+## Technology used
+
+*   .NET Core MVC

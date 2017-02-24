@@ -1,0 +1,27 @@
+@using Jinder.Models.HomeViewModels
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+
+    <div class="col-md-6">
+        <h1>Welcome to Jinder!</h1>
+        <br>
+        <b>If your name rhymes with 'loool' enter the password to find the mate for your soul:</b>
+        <br>
+        <i>Hint: A true timeless pleasure. Rhymes with fuzzy socks</i>
+        <form asp-controller="Home" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+            <br>
+            <input asp-for="Password" class="form-control" />
+            <br>
+            <button type="submit" class="btn btn-default">Show me the Jinder!</button>
+        </form>
+    </div>
+
+    <div class="col-md-6" id="flame-icon">
+        <img src="~/images/flame-icon.svg" alt="flame-icon" height="250" width="250" id="flame-icon">
+    </div>
+
+</div>

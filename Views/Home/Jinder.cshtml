@@ -1,0 +1,97 @@
+@{
+    ViewData["Title"] = "Jinder";
+}
+
+<div style="margin-bottom:20px">
+</div>
+
+<!-- start padding container -->
+<div class="wrap">
+    <!-- start jflame container -->
+    <div id="slideOuter">
+    <div id="flameslide">
+        <ul>
+            <li class="pane1">
+                <div class="img"></div>
+                <div>Miami Beach</div>
+                <div class="like"></div>
+                <div class="dislike"></div>
+            </li>
+            <li class="pane2">
+                <div class="img"></div>
+                <div>San Francisco</div>
+                <div class="like"></div>
+                <div class="dislike"></div>
+            </li>
+            <li class="pane3">
+                <div class="img"></div>
+                <div>Chicago</div>
+                <div class="like"></div>
+                <div class="dislike"></div>
+            </li>
+            <li class="pane4">
+                <div class="img"></div>
+                <div>New York</div>
+                <div class="like"></div>
+                <div class="dislike"></div>
+            </li>
+            <li class="pane5">
+                <div class="img"></div>
+                <div>Beach</div>
+                <div class="like"></div>
+                <div class="dislike"></div>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <!-- end jflame container -->
+</div>
+<!-- end padding container -->
+    
+<div class="actions-wrap"> 
+    <div class="actions">
+        <a href="#" class="profile"><i></i></a>
+        <a href="#" class="dislike"><i></i></a>
+        <a href="#" class="like"><i></i></a>
+    </div>
+</div>
+
+<!-- Profile Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <b>Profile:</b>
+    <p id="profileText">Nothing on his baby face is particularly pretty, but somehow it all just works together.</p>
+  </div>
+</div>
+
+<!-- It's A Match Modal' -->
+<div id="matchModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>It's a Match!</h2>
+    <h3>You and John have liked each-other</h3>
+    <div>
+        <img class="img-circle" src="/img/pane/matchFace.jpg">
+        <img class="img-circle" id="john-image">
+    </div>   
+  </div>
+</div>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+@section Scripts
+{
+    <!-- transform2d lib -->
+    <script type="text/javascript" src="~/js/jquery.transform2d.js"></script>
+
+    <!-- jflame lib -->
+    <script type="text/javascript" src="~/js/jquery.jflame.js"></script>
+
+    <!-- jflame initialization script -->
+    <script type="text/javascript" src="~/js/main.js"></script>
+
+}
