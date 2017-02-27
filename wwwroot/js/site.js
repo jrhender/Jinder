@@ -36,7 +36,7 @@ $('.actions .profile').click(function(e){
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
     if(currentPane){
-        $("#john-image").attr("src","/img/pane/john".concat(currentPane,".jpg"));
+        $("#john-image").attr("src","/img/pane/pane".concat(currentPane,".jpg"));
     }
     matchModal.style.display = "block";
 }

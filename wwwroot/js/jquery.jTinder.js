@@ -71,6 +71,10 @@
 		},
 
 		like: function() {
+			
+			//It's a like so show the match modal
+			showMatchModal();
+
 			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 				if($that.settings.onLike) {
 					$that.settings.onLike(panes.eq(current_pane));
@@ -136,6 +140,10 @@
 
 					if (opa >= 1) {
 						if (posX > 0) {
+
+							//It's a like so show the match modal
+							showMatchModal();
+
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
@@ -176,3 +184,8 @@
 	};
 
 })(jQuery, window, document);
+
+var showMatchModal = function(){
+	$("#john-image").attr("src","/img/pane/pane".concat(currentPane,".jpg"));
+	$("#matchModal").show();
+}

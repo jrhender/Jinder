@@ -12,13 +12,15 @@ $(JTinderDivID).jTinder({
     onDislike: function (item) {
 	    // set the status text
         $('#status').html('Dislike image ' + (item.index()+1));
-		currentPane = item.index()+1;
+		currentPane = item.index();
     },
 	// like callback
     onLike: function (item) {
 	    // set the status text
         $('#status').html('Like image ' + (item.index()+1));
-		currentPane = item.index()+1;
+		
+		//update the currentPane
+		currentPane = item.index();
     },
 	animationRevertSpeed: 200,
 	animationSpeed: 400,
@@ -38,11 +40,7 @@ $('.actions .dislike').click(function(e){
 $('.actions .like').click(function(e){
 	e.preventDefault();
 
-	//It's a like so show the match modal
-	$("#john-image").attr("src","/img/pane/john".concat(currentPane,".jpg"));
-	$("#matchModal").show();
-
 	//trigger the JTinder to update the next image
-	//$("#Tinderslide").jTinder($(this).attr('class'));
+	$("#Tinderslide").jTinder($(this).attr('class'));
 });
 
