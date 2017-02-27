@@ -18,13 +18,6 @@ namespace Jinder.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
         [Authorize(Policy = "isAuthorized")]
         public IActionResult Jinder()
         {
@@ -52,45 +45,26 @@ namespace Jinder.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid && model.Password == "jinglebellrocks")
             {                
-                const string Issuer = "https://Jinder.com";
-
                 var claims = new List<Claim> {
-                    new Claim(ClaimTypes.Name, "Authorized", ClaimValueTypes.String, Issuer),
-                    new Claim(ClaimTypes.Surname, "Lock", ClaimValueTypes.String, Issuer),
-                    new Claim(ClaimTypes.Country, "UK", ClaimValueTypes.String, Issuer),
                     new Claim("Authorized", "isAuthorized", ClaimValueTypes.String)
                 };
 
-                var userIdentity = new ClaimsIdentity(claims, "Passport");
+                var userIdentity = new ClaimsIdentity(claims);
 
                 var userPrincipal = new ClaimsPrincipal(userIdentity);
 
                 await HttpContext.Authentication.SignInAsync("Cookie", userPrincipal,
                     new AuthenticationProperties
                     {
-                        ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
+                        ExpiresUtc = DateTime.UtcNow.AddDays(30),
                         IsPersistent = false,
                         AllowRefresh = false
                     });
-
-                //return RedirectToLocal(returnUrl);
                 return RedirectToAction(nameof(HomeController.Jinder), "Home");
             }
 
             // If we got this far, something failed, redisplay form
             return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
         }
     }
 }
