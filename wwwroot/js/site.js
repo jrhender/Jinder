@@ -33,14 +33,6 @@ $('.actions .profile').click(function(e){
 	modal.style.display = "block";
 });
 
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    if(currentPane){
-        $("#john-image").attr("src","/img/pane/pane".concat(currentPane,".jpg"));
-    }
-    matchModal.style.display = "block";
-}
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
