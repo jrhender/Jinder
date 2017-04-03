@@ -1,0 +1,22 @@
+{
+  "name": "jinder",
+  "version": "1.0.0",
+  "description": "jinder app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrhender/Jinder.git/"
+  },
+  "author": "John Henderson",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0"
+  }
+}

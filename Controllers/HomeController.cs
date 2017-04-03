@@ -24,6 +24,11 @@ namespace Jinder.Controllers
             return View();
         }
 
+        public IActionResult JinderReact()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();
