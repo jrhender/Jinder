@@ -9,7 +9,7 @@ class App extends React.Component {
   render () {
     return (
         <div>
-            <JTinderComponent/>
+            <JTinderComponent threshold="1" animationRevertSpeed="200" animationSpeed="400"/>
         </div>
     )
   }
