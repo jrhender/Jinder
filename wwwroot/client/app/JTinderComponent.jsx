@@ -10,13 +10,13 @@ class JTinderComponent extends React.Component {
 
         this.paneCount = 2;
 
-        let paneStylesVar = []
-        let blankTranslate = {
-            transform : ''
-        }
-        for (var i = 0; i < this.paneCount; i++){
-            paneStylesVar.push(blankTranslate);
-        }
+        // let paneStylesVar = []
+        // let blankTranslate = {
+        //     transform : ''
+        // }
+        // for (var i = 0; i < this.paneCount; i++){
+        //     paneStylesVar.push(blankTranslate);
+        // }
 
         this.state = {
             currentPane : 1,
@@ -28,7 +28,8 @@ class JTinderComponent extends React.Component {
                 width: -1,
                 height: -1
             },
-            paneStyles : paneStylesVar
+            paneStyles : new Array(this.paneCount),
+            likeStatusArray : new Array(this.paneCount)
         };
 
 
@@ -125,11 +126,6 @@ class JTinderComponent extends React.Component {
             let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
             let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
             let percent = ((100 / this.state.dimensions.width) * deltaX) / this.paneCount;
-            
-            this.setState({
-                posX : deltaX + this.state.lastPosX,
-                posY : deltaY + this.state.lastPosY
-            })
 
             let translateTransform = 'translate(' + this.state.posX + 'px, ' + this.state.posY + 'px)';
             let rotateTransform = 'rotate(' + (percent / 2) + 'deg)';
@@ -138,8 +134,11 @@ class JTinderComponent extends React.Component {
             paneStylesVar[this.state.currentPane] = {
                 transform: concatTransform
             } 
+            
             this.setState({
-                paneStyles : paneStylesVar
+                    posX : deltaX + this.state.lastPosX,
+                    posY : deltaY + this.state.lastPosY,
+                    paneStyles: paneStylesVar
             })
 
             let opa = (Math.abs(deltaX) / this.props.threshold) / 100 + 0.2;
@@ -169,9 +168,9 @@ class JTinderComponent extends React.Component {
     }    
 
     render() {
-        let panes = [];
+        let panes = new Array(this.paneCount)
         for (var i=0; i < this.paneCount; i++) {
-            panes.push(<JTinderPane key={i} paneNumber={i} style={this.state.paneStyles[i]} />);
+            panes.push(<JTinderPane key={i} paneNumber={i} style={this.state.paneStyles[i]} likeStatus={this.state.likeStatusArray[i]} />);
         }
 
         return (

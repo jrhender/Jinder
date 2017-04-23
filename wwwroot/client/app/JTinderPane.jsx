@@ -7,8 +7,8 @@ class JTinderPane extends React.Component {
     }
 
     render() {
-        var paneNumber = this.props.paneNumber;
-        var transformStyle = this.props.style;
+        let paneNumber = this.props.paneNumber;
+        let transformStyle = this.props.style;
         return(
             <li className={"pane"+paneNumber} style={transformStyle}>
                 <div className="img"></div>
