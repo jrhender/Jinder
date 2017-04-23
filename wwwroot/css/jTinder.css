@@ -215,11 +215,11 @@ body {
     background: url("../img/pane/pane3.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#Tinderslide .pane2 .img {
+#Tinderslide .pane1 .img {
     background: url("../img/pane/pane2.jpg") no-repeat scroll center center;
     background-size: cover;
 }
-#Tinderslide .pane1 .img {
+#Tinderslide .pane0 .img {
     background: url("../img/pane/pane1.jpg") no-repeat scroll center center;
     background-size: cover;
 }

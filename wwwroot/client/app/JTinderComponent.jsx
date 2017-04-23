@@ -3,15 +3,6 @@ import React from 'react';
 import JTinderPane from './JTinderPane.jsx';
 import Measure from 'react-measure';
 
-var styles = {
-    color1: {
-        backgroundColor: 'red'
-    },
-    color2: {
-        backgroundColor: 'green'
-    }
-}
-
 class JTinderComponent extends React.Component {
     
     constructor(props) {
@@ -66,7 +57,7 @@ class JTinderComponent extends React.Component {
         })
 
         let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);     
-        let paneStylesVar = this.state.paneStyles 
+        
 
         if (opa >= 1) {
                  
@@ -75,13 +66,15 @@ class JTinderComponent extends React.Component {
                 //It's a like so show the match modal
                 //showMatchModal();
                 
-                paneStylesVar[this.state.currentPane] = {
-                    transform: 
-                        'translate(' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
-                        ' ' + 
-                        'rotate(60deg)'
-                } 
+                // let paneStylesVar = this.state.paneStyles; 
+                // paneStylesVar[this.state.currentPane] = {
+                //     transform: 
+                //         'translate(' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
+                //         ' ' + 
+                //         'rotate(60deg)'
+                // } 
 
+                this.nextPane();
 
                 // if($that.settings.onLike) {
                 //     $that.settings.onLike(panes.eq(current_pane));
@@ -89,14 +82,15 @@ class JTinderComponent extends React.Component {
                 // $that.next();
             } else {
 
-                //panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
+                // let paneStylesVar = this.state.paneStyles;
+                // paneStylesVar[this.state.currentPane] = {
+                //     transform: 
+                //         'translate(-' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
+                //         ' ' + 
+                //         'rotate(-60deg)'
+                // } 
                 
-                paneStylesVar[this.state.currentPane] = {
-                    transform: 
-                        'translate(-' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
-                        ' ' + 
-                        'rotate(-60deg)'
-                } 
+                this.nextPane();
 
                 // if($that.settings.onDislike) {
                 //     $that.settings.onDislike(panes.eq(current_pane));
@@ -105,25 +99,23 @@ class JTinderComponent extends React.Component {
             }
 
         } else {
-            this.setState({
-                lastPosX : 0,
-                lastPosY : 0
-            })
-
-            paneStylesVar[this.state.currentPane] = {
-                transform: 
-                    'translate(0px,0px) rotate(0deg)'
-            } 
-
-            // panes.eq(current_pane).animate({"transform": "translate(0px,0px) rotate(0deg)"}, $that.settings.animationRevertSpeed);
+            this.setState((prevState) => {
+                return {
+                    lastPosX : 0,
+                    lastPosY : 0,
+                    paneStyles : prevState.paneStyles.map(function(item, index) {
+                    return index == prevState.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
+                    })
+                }           
+            });
             
             // panes.eq(current_pane).find($that.settings.likeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
             // panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
         }
 
-        this.setState({
-            paneStyles : paneStylesVar
-        })
+        // this.setState({
+        //     paneStyles : paneStylesVar
+        // })
     }
 
     mousemove(ev) {
@@ -133,6 +125,7 @@ class JTinderComponent extends React.Component {
             let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
             let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
             let percent = ((100 / this.state.dimensions.width) * deltaX) / this.paneCount;
+            
             this.setState({
                 posX : deltaX + this.state.lastPosX,
                 posY : deltaY + this.state.lastPosY
@@ -148,9 +141,6 @@ class JTinderComponent extends React.Component {
             this.setState({
                 paneStyles : paneStylesVar
             })
-            //this.state.paneStyles[this.state.currentPane] = translateTransform + ' ' + rotateTransform;
-
-            //panes.eq(current_pane).css("transform", "translate(" + posX + "px," + posY + "px) rotate(" + (percent / 2) + "deg)");
 
             let opa = (Math.abs(deltaX) / this.props.threshold) / 100 + 0.2;
             // if(opa > 1.0) {
@@ -167,7 +157,16 @@ class JTinderComponent extends React.Component {
         }
     }
 
-    
+    nextPane() {
+        this.setState((prevState) => {
+            return {
+                currentPane : (prevState.currentPane - 1),
+                paneStyles : prevState.paneStyles.map(function(item, index) { 
+                    return (index == prevState.currentPane ? {visibility: 'hidden'} : item);
+                })
+            }
+        });
+    }    
 
     render() {
         let panes = [];
