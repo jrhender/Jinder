@@ -10,13 +10,10 @@ class JTinderComponent extends React.Component {
 
         this.paneCount = 2;
 
-        // let paneStylesVar = []
-        // let blankTranslate = {
-        //     transform : ''
-        // }
-        // for (var i = 0; i < this.paneCount; i++){
-        //     paneStylesVar.push(blankTranslate);
-        // }
+        let initializingArray = [];
+        for(let i =0; i < this.paneCount; i++ ){
+            initializingArray.push({});
+        }
 
         this.state = {
             currentPane : 1,
@@ -28,8 +25,9 @@ class JTinderComponent extends React.Component {
                 width: -1,
                 height: -1
             },
-            paneStyles : new Array(this.paneCount),
-            likeStatusArray : new Array(this.paneCount)
+            paneStyles : initializingArray,
+            likeOpacityArray : initializingArray,
+            dislikeOpacityArray : initializingArray
         };
 
 
@@ -105,8 +103,14 @@ class JTinderComponent extends React.Component {
                     lastPosX : 0,
                     lastPosY : 0,
                     paneStyles : prevState.paneStyles.map(function(item, index) {
-                    return index == prevState.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
-                    })
+                        return index == prevState.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
+                        }),
+                    likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
+                            return index == prevState.currentPane ? {opacity: 0} : item
+                        }),
+                    dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
+                            return index == prevState.currentPane ? {opacity: 0} : item
+                        })
                 }           
             });
             
@@ -133,26 +137,41 @@ class JTinderComponent extends React.Component {
             let paneStylesVar = this.state.paneStyles;
             paneStylesVar[this.state.currentPane] = {
                 transform: concatTransform
-            } 
-            
-            this.setState({
-                    posX : deltaX + this.state.lastPosX,
-                    posY : deltaY + this.state.lastPosY,
-                    paneStyles: paneStylesVar
-            })
+            }
 
             let opa = (Math.abs(deltaX) / this.props.threshold) / 100 + 0.2;
-            // if(opa > 1.0) {
-            //     opa = 1.0;
-            // }
-            // if (posX >= 0) {
-            //     panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', opa);
-            //     panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', 0);
-            // } else if (posX < 0) {
-
-            //     panes.eq(current_pane).find($that.settings.dislikeSelector).css('opacity', opa);
-            //     panes.eq(current_pane).find($that.settings.likeSelector).css('opacity', 0);
-            // }
+            if(opa > 1.0) {
+                opa = 1.0;
+            }
+            if (this.state.posX >= 0) {
+                this.setState((prevState) => {
+                    return {
+                        posX : deltaX + this.state.lastPosX,
+                        posY : deltaY + this.state.lastPosY,
+                        paneStyles: paneStylesVar,
+                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
+                            return index == prevState.currentPane ? {opacity: opa} : item
+                        }),
+                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
+                            return index == prevState.currentPane ? {opacity: 0} : item
+                        })
+                    }
+                });
+            } else if (this.state.posX < 0) {
+                this.setState((prevState) => {
+                    return {
+                        posX : deltaX + this.state.lastPosX,
+                        posY : deltaY + this.state.lastPosY,
+                        paneStyles: paneStylesVar,
+                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
+                            return (index == prevState.currentPane ? {opacity: 0} : item);
+                        }),
+                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
+                            return (index == prevState.currentPane ? {opacity: opa} : item);
+                        })
+                    }
+                });
+            }
         }
     }
 
@@ -170,7 +189,12 @@ class JTinderComponent extends React.Component {
     render() {
         let panes = new Array(this.paneCount)
         for (var i=0; i < this.paneCount; i++) {
-            panes.push(<JTinderPane key={i} paneNumber={i} style={this.state.paneStyles[i]} likeStatus={this.state.likeStatusArray[i]} />);
+            panes.push(<JTinderPane key={i}
+                            paneNumber={i} 
+                            transformStyle={this.state.paneStyles[i]} 
+                            likeOpacity={this.state.likeOpacityArray[i]} 
+                            dislikeOpacity={this.state.dislikeOpacityArray[i]}
+                        />);
         }
 
         return (
