@@ -15,7 +15,6 @@ class JTinderPane extends React.Component {
         return(
             <li className={"pane"+paneNumber} style={transformStyle}>
                 <div className="img"></div>
-                <div>Miami Beach</div>
                 <div className="like" style={likeOpacity}></div>
                 <div className="dislike" style={dislikeOpacity}></div>
             </li>

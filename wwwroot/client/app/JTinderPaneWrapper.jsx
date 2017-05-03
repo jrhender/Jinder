@@ -3,7 +3,7 @@ import React from 'react';
 import JTinderPane from './JTinderPane.jsx';
 import Measure from 'react-measure';
 
-class JTinderComponent extends React.Component {
+class JTinderPaneWrapper extends React.Component {
     
     constructor(props) {
         super(props);
@@ -113,14 +113,7 @@ class JTinderComponent extends React.Component {
                         })
                 }           
             });
-            
-            // panes.eq(current_pane).find($that.settings.likeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
-            // panes.eq(current_pane).find($that.settings.dislikeSelector).animate({"opacity": 0}, $that.settings.animationRevertSpeed);
         }
-
-        // this.setState({
-        //     paneStyles : paneStylesVar
-        // })
     }
 
     mousemove(ev) {
@@ -230,4 +223,4 @@ class JTinderComponent extends React.Component {
 
 }
 
-export default JTinderComponent;
+export default JTinderPaneWrapper;
