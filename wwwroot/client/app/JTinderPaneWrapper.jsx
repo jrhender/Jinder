@@ -8,10 +8,10 @@ class JTinderPaneWrapper extends React.Component {
     constructor(props) {
         super(props);
 
-        this.paneCount = 2;
+        //this.paneCount = 2;
 
         let initializingArray = [];
-        for(let i =0; i < this.paneCount; i++ ){
+        for(let i =0; i < this.props.paneCount; i++ ){
             initializingArray.push({});
         }
 
@@ -122,7 +122,7 @@ class JTinderPaneWrapper extends React.Component {
             let pageY = typeof ev.pageY == 'undefined' ? ev.originalEvent.touches[0].pageY : ev.pageY;
             let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
             let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
-            let percent = ((100 / this.state.dimensions.width) * deltaX) / this.paneCount;
+            let percent = ((100 / this.state.dimensions.width) * deltaX) / this.props.paneCount;
 
             let translateTransform = 'translate(' + this.state.posX + 'px, ' + this.state.posY + 'px)';
             let rotateTransform = 'rotate(' + (percent / 2) + 'deg)';
@@ -180,8 +180,8 @@ class JTinderPaneWrapper extends React.Component {
     }    
 
     render() {
-        let panes = new Array(this.paneCount)
-        for (var i=0; i < this.paneCount; i++) {
+        let panes = new Array(this.props.paneCount)
+        for (var i=0; i < this.props.paneCount; i++) {
             panes.push(<JTinderPane key={i}
                             paneNumber={i} 
                             transformStyle={this.state.paneStyles[i]} 
