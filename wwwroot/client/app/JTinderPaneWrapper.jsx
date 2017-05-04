@@ -74,11 +74,7 @@ class JTinderPaneWrapper extends React.Component {
                 // } 
                 this.props.handleLike();
                 this.nextPane();
-
-                // if($that.settings.onLike) {
-                //     $that.settings.onLike(panes.eq(current_pane));
-                // }
-                // $that.next();
+                
             } else {
 
                 // let paneStylesVar = this.state.paneStyles;
@@ -90,11 +86,6 @@ class JTinderPaneWrapper extends React.Component {
                 // } 
                 this.props.handleDislike();
                 this.nextPane();
-
-                // if($that.settings.onDislike) {
-                //     $that.settings.onDislike(panes.eq(current_pane));
-                // }
-                // $that.next();
             }
 
         } else {
