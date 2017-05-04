@@ -8,15 +8,12 @@ class JTinderPaneWrapper extends React.Component {
     constructor(props) {
         super(props);
 
-        //this.paneCount = 2;
-
         let initializingArray = [];
         for(let i =0; i < this.props.paneCount; i++ ){
             initializingArray.push({});
         }
 
         this.state = {
-            currentPane : this.props.paneCount-1,
             paneWidth : 0,
             touchStart : false,
             xStart : 0, yStart : 0,
@@ -74,7 +71,7 @@ class JTinderPaneWrapper extends React.Component {
                 // } 
                 this.props.handleLike();
                 this.nextPane();
-                
+
             } else {
 
                 // let paneStylesVar = this.state.paneStyles;
@@ -94,14 +91,14 @@ class JTinderPaneWrapper extends React.Component {
                     lastPosX : 0,
                     lastPosY : 0,
                     paneStyles : prevState.paneStyles.map(function(item, index) {
-                        return index == prevState.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
-                        }),
+                        return index == this.props.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
+                        }, this),
                     likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return index == prevState.currentPane ? {opacity: 0} : item
-                        }),
+                            return index == this.props.currentPane ? {opacity: 0} : item
+                        }, this),
                     dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return index == prevState.currentPane ? {opacity: 0} : item
-                        })
+                            return index == this.props.currentPane ? {opacity: 0} : item
+                        }, this)
                 }           
             });
         }
@@ -119,7 +116,7 @@ class JTinderPaneWrapper extends React.Component {
             let rotateTransform = 'rotate(' + (percent / 2) + 'deg)';
             let concatTransform = translateTransform + ' ' + rotateTransform;
             let paneStylesVar = this.state.paneStyles;
-            paneStylesVar[this.state.currentPane] = {
+            paneStylesVar[this.props.currentPane] = {
                 transform: concatTransform
             }
 
@@ -134,11 +131,11 @@ class JTinderPaneWrapper extends React.Component {
                         posY : deltaY + this.state.lastPosY,
                         paneStyles: paneStylesVar,
                         likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return index == prevState.currentPane ? {opacity: opa} : item
-                        }),
+                            return index == this.props.currentPane ? {opacity: opa} : item
+                        }, this),
                         dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return index == prevState.currentPane ? {opacity: 0} : item
-                        })
+                            return index == this.props.currentPane ? {opacity: 0} : item
+                        }, this)
                     }
                 });
             } else if (this.state.posX < 0) {
@@ -148,11 +145,11 @@ class JTinderPaneWrapper extends React.Component {
                         posY : deltaY + this.state.lastPosY,
                         paneStyles: paneStylesVar,
                         likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return (index == prevState.currentPane ? {opacity: 0} : item);
-                        }),
+                            return (index == this.props.currentPane ? {opacity: 0} : item);
+                        }, this),
                         dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return (index == prevState.currentPane ? {opacity: opa} : item);
-                        })
+                            return (index == this.props.currentPane ? {opacity: opa} : item);
+                        }, this)
                     }
                 });
             }
@@ -162,10 +159,9 @@ class JTinderPaneWrapper extends React.Component {
     nextPane() {
         this.setState((prevState) => {
             return {
-                currentPane : (prevState.currentPane - 1),
                 paneStyles : prevState.paneStyles.map(function(item, index) { 
-                    return (index == prevState.currentPane ? {visibility: 'hidden'} : item);
-                })
+                    return (index == this.props.currentPane ? {visibility: 'hidden'} : item);
+                }, this)
             }
         });
     }    

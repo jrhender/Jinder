@@ -53,6 +53,7 @@ class App extends React.Component {
                     animationRevertSpeed="200" 
                     animationSpeed="400" 
                     paneCount="2" 
+                    currentPane={this.state.currentPane}
                     likeStatusArray={this.state.likeStatusArray}
                     handleLike = {this.handleLike.bind(this)}
                     handleDislike = {this.handleDislike.bind(this)}
