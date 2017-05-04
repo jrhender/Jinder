@@ -16,7 +16,7 @@ class JTinderPaneWrapper extends React.Component {
         }
 
         this.state = {
-            currentPane : 1,
+            currentPane : this.props.paneCount-1,
             paneWidth : 0,
             touchStart : false,
             xStart : 0, yStart : 0,
@@ -72,7 +72,7 @@ class JTinderPaneWrapper extends React.Component {
                 //         ' ' + 
                 //         'rotate(60deg)'
                 // } 
-
+                this.props.handleLike();
                 this.nextPane();
 
                 // if($that.settings.onLike) {
@@ -88,7 +88,7 @@ class JTinderPaneWrapper extends React.Component {
                 //         ' ' + 
                 //         'rotate(-60deg)'
                 // } 
-                
+                this.props.handleDislike();
                 this.nextPane();
 
                 // if($that.settings.onDislike) {
@@ -187,6 +187,7 @@ class JTinderPaneWrapper extends React.Component {
                             transformStyle={this.state.paneStyles[i]} 
                             likeOpacity={this.state.likeOpacityArray[i]} 
                             dislikeOpacity={this.state.dislikeOpacityArray[i]}
+                            likeStatus={this.props.likeStatusArray[i]}
                         />);
         }
 
