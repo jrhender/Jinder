@@ -59,7 +59,7 @@ class App extends React.Component {
                     handleDislike = {this.handleDislike.bind(this)}
                 />
 
-                <JTinderButtons />
+                <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)}/>
             </div>
         )
     }

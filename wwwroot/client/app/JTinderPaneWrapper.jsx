@@ -27,7 +27,6 @@ class JTinderPaneWrapper extends React.Component {
             dislikeOpacityArray : initializingArray
         };
 
-
     }
 
     mousedown(ev) {
@@ -70,7 +69,7 @@ class JTinderPaneWrapper extends React.Component {
                 //         'rotate(60deg)'
                 // } 
                 this.props.handleLike();
-                this.nextPane();
+                //this.nextPane();
 
             } else {
 
@@ -82,7 +81,7 @@ class JTinderPaneWrapper extends React.Component {
                 //         'rotate(-60deg)'
                 // } 
                 this.props.handleDislike();
-                this.nextPane();
+                //this.nextPane();
             }
 
         } else {
