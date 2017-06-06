@@ -8,7 +8,7 @@ class App extends React.Component {
 
     constructor() {
         super();
-        this.paneCount = 2;
+        this.paneCount = 3;
 
         let initializingArray = [];
         for(let i =0; i < this.paneCount; i++ ){
@@ -52,7 +52,7 @@ class App extends React.Component {
                     threshold="1" 
                     animationRevertSpeed="200" 
                     animationSpeed="400" 
-                    paneCount="2" 
+                    paneCount={this.paneCount}
                     currentPane={this.state.currentPane}
                     likeStatusArray={this.state.likeStatusArray}
                     handleLike = {this.handleLike.bind(this)}
