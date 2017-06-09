@@ -2,6 +2,7 @@ import React from 'react';
 
 import JTinderPane from './JTinderPane.jsx';
 import Measure from 'react-measure';
+import {Motion} from 'react-motion';
 
 class JTinderPaneWrapper extends React.Component {
     
@@ -24,39 +25,50 @@ class JTinderPaneWrapper extends React.Component {
             },
             paneStyles : initializingArray,
             likeOpacityArray : initializingArray,
-            dislikeOpacityArray : initializingArray
+            dislikeOpacityArray : initializingArray,
+            xPosArray : initializingArray,
+            yPosArray : initializingArray,
+            xTranslateArray : [0,0,0], //initializingArray.map(()=>0),
+            yTranslateArray : [0,0,0], //initializingArray.map(()=>0),
+            rotationArray : [0,0,0] //initializingArray.map(()=>0),
         };
 
     }
 
     mousedown(ev) {
         if(this.state.touchStart === false) {
-            this.setState({
+            let pageXVal = ev.pageX;
+            let pageYVal = ev.pageY;
+            this.setState((prevState) => {return {
                 touchStart : true,
-                xStart : ev.pageX,
-                yStart : ev.pageY,
-            });
+                xStart : pageXVal,
+                yStart : pageYVal
+            }});
         }
     }
 
     mouseup(ev) {
+        
+        // let pageY = (typeof ev.pageY == 'undefined') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY;
+        
+        // let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
+
+        // this.setState({
+            
+        //     // xPosArray: prevState.xPosArray.map((item, index) => {index == this.props.currentPane ? deltaX : item }, this),
+        //     // yPosArray: prevState.xPosArray.map((item, index) => {index == this.props.currentPane ? deltaY : item }, this),
+        //     // posX : deltaX + this.state.lastPosX,
+        //     // posY : deltaY + this.state.lastPosY
+        // })
+
         let pageX = (typeof ev.pageX == 'undefined') ? ev.originalEvent.changedTouches[0].pageX : ev.pageX;
-        let pageY = (typeof ev.pageY == 'undefined') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY;
         let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
-        let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
-
-        this.setState({
-            touchStart: false,
-            posX : deltaX + this.state.lastPosX,
-            posY : deltaY + this.state.lastPosY
-        })
-
-        let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);     
+        let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);
         
 
         if (opa >= 1) {
                  
-            if (this.state.posX > 0) {
+            if (this.state.xPosArray[this.state.currentPane] > 0) {
 
                 //It's a like so show the match modal
                 //showMatchModal();
@@ -87,17 +99,14 @@ class JTinderPaneWrapper extends React.Component {
         } else {
             this.setState((prevState) => {
                 return {
+                    touchStart: false,
                     lastPosX : 0,
                     lastPosY : 0,
-                    paneStyles : prevState.paneStyles.map(function(item, index) {
-                        return index == this.props.currentPane ? {transform: 'translate(0px,0px) rotate(0deg)'} : item 
-                        }, this),
-                    likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return index == this.props.currentPane ? {opacity: 0} : item
-                        }, this),
-                    dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return index == this.props.currentPane ? {opacity: 0} : item
-                        }, this)
+                    xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
+                    yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
+                    rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
+                    likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opa: 0} : item}, this),
+                    dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opae: 0} : item}, this)
                 }           
             });
         }
@@ -111,70 +120,67 @@ class JTinderPaneWrapper extends React.Component {
             let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
             let percent = ((100 / this.state.dimensions.width) * deltaX) / this.props.paneCount;
 
-            let translateTransform = 'translate(' + this.state.posX + 'px, ' + this.state.posY + 'px)';
-            let rotateTransform = 'rotate(' + (percent / 2) + 'deg)';
-            let concatTransform = translateTransform + ' ' + rotateTransform;
-            let paneStylesVar = this.state.paneStyles;
-            paneStylesVar[this.props.currentPane] = {
-                transform: concatTransform
-            }
-
             let opa = (Math.abs(deltaX) / this.props.threshold) / 100 + 0.2;
             if(opa > 1.0) {
                 opa = 1.0;
             }
-            if (this.state.posX >= 0) {
+            if (deltaX > 0) {
                 this.setState((prevState) => {
                     return {
-                        posX : deltaX + this.state.lastPosX,
-                        posY : deltaY + this.state.lastPosY,
-                        paneStyles: paneStylesVar,
-                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return index == this.props.currentPane ? {opacity: opa} : item
-                        }, this),
-                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return index == this.props.currentPane ? {opacity: 0} : item
-                        }, this)
+                        xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? deltaX : item }, this),
+                        yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? deltaY : item} , this),
+                        rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? percent/2 : item }, this),
+                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: opa} : item}, this),
+                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this)
                     }
                 });
-            } else if (this.state.posX < 0) {
+            } else if (deltaX < 0) {
                 this.setState((prevState) => {
                     return {
-                        posX : deltaX + this.state.lastPosX,
-                        posY : deltaY + this.state.lastPosY,
-                        paneStyles: paneStylesVar,
-                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) { 
-                            return (index == this.props.currentPane ? {opacity: 0} : item);
-                        }, this),
-                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) { 
-                            return (index == this.props.currentPane ? {opacity: opa} : item);
-                        }, this)
+                        xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? deltaX : item }, this),
+                        yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? deltaY : item }, this),
+                        rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? percent/2 : item }, this),
+                        likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
+                        dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: opa} : item}, this)
                     }
                 });
             }
         }
     }
 
-    nextPane() {
-        this.setState((prevState) => {
-            return {
-                paneStyles : prevState.paneStyles.map(function(item, index) { 
-                    return (index == this.props.currentPane ? {visibility: 'hidden'} : item);
-                }, this)
-            }
-        });
-    }    
+    // nextPane() {
+    //     this.setState((prevState) => {
+    //         return {
+    //             paneStyles : prevState.paneStyles.map(function(item, index) { 
+    //                 return (index == this.props.currentPane ? {visibility: 'hidden'} : item);
+    //             }, this)
+    //         }
+    //     });
+    // }    
 
     render() {
         let panes = new Array(this.props.paneCount)
         for (var i=0; i < this.props.paneCount; i++) {
-            panes.push(<JTinderPane key={i}
+            panes.push(
+                <Motion
+                    key={i} 
+                    defaultStyle={{xTranslateVal: 0, yTranslateVal: 0, rotationVal: 0}}
+                    style={{xTranslateVal: this.state.xTranslateArray[i], yTranslateVal: this.state.yTranslateArray[i], rotationVal: this.state.rotationArray[i]}}
+                    >
+                    {({xTranslateVal, yTranslateVal, rotationVal})=> 
+                        <JTinderPane 
                             paneNumber={i} 
-                            transformStyle={this.state.paneStyles[i]} 
+                            transformStyle={
+                            {transform: 'translate(' +xTranslateVal+ 'px, ' +
+                            yTranslateVal + 'px) ' +
+                            'rotate('+rotationVal+'deg)'}
+                            }
                             likeOpacity={this.state.likeOpacityArray[i]} 
                             dislikeOpacity={this.state.dislikeOpacityArray[i]}
                             likeStatus={this.props.likeStatusArray[i]}
-                        />);
+                        />}
+                </Motion>
+            );
         }
 
         return (
