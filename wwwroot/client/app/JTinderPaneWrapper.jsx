@@ -88,8 +88,8 @@ class JTinderPaneWrapper extends React.Component {
                     xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
                     yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
                     rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
-                    likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opa: 0} : item}, this),
-                    dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opae: 0} : item}, this)
+                    likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
+                    dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this)
                 }           
             });
         }
