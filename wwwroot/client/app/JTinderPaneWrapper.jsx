@@ -15,7 +15,6 @@ class JTinderPaneWrapper extends React.Component {
         }
 
         this.state = {
-            paneWidth : 0,
             touchStart : false,
             xStart : 0, yStart : 0,
             posX : 0, posY : 0, lastPosX : 0, lastPosY : 0,
@@ -23,14 +22,11 @@ class JTinderPaneWrapper extends React.Component {
                 width: -1,
                 height: -1
             },
-            paneStyles : initializingArray,
             likeOpacityArray : initializingArray,
             dislikeOpacityArray : initializingArray,
-            xPosArray : initializingArray,
-            yPosArray : initializingArray,
-            xTranslateArray : [0,0,0], //initializingArray.map(()=>0),
-            yTranslateArray : [0,0,0], //initializingArray.map(()=>0),
-            rotationArray : [0,0,0] //initializingArray.map(()=>0),
+            xTranslateArray : initializingArray.map(()=>0),
+            yTranslateArray : initializingArray.map(()=>0),
+            rotationArray : initializingArray.map(()=>0),
         };
 
     }
@@ -48,19 +44,6 @@ class JTinderPaneWrapper extends React.Component {
     }
 
     mouseup(ev) {
-        
-        // let pageY = (typeof ev.pageY == 'undefined') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY;
-        
-        // let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
-
-        // this.setState({
-            
-        //     // xPosArray: prevState.xPosArray.map((item, index) => {index == this.props.currentPane ? deltaX : item }, this),
-        //     // yPosArray: prevState.xPosArray.map((item, index) => {index == this.props.currentPane ? deltaY : item }, this),
-        //     // posX : deltaX + this.state.lastPosX,
-        //     // posY : deltaY + this.state.lastPosY
-        // })
-
         let pageX = (typeof ev.pageX == 'undefined') ? ev.originalEvent.changedTouches[0].pageX : ev.pageX;
         let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
         let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);
@@ -68,7 +51,7 @@ class JTinderPaneWrapper extends React.Component {
 
         if (opa >= 1) {
                  
-            if (this.state.xPosArray[this.state.currentPane] > 0) {
+            if (this.state.xTranslateArray[this.state.currentPane] > 0) {
 
                 //It's a like so show the match modal
                 //showMatchModal();
@@ -171,9 +154,9 @@ class JTinderPaneWrapper extends React.Component {
                         <JTinderPane 
                             paneNumber={i} 
                             transformStyle={
-                            {transform: 'translate(' +xTranslateVal+ 'px, ' +
-                            yTranslateVal + 'px) ' +
-                            'rotate('+rotationVal+'deg)'}
+                                {transform: 'translate(' +xTranslateVal+ 'px, ' +
+                                yTranslateVal + 'px) ' +
+                                'rotate('+rotationVal+'deg)'}
                             }
                             likeOpacity={this.state.likeOpacityArray[i]} 
                             dislikeOpacity={this.state.dislikeOpacityArray[i]}
