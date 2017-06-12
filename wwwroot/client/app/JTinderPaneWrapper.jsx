@@ -145,24 +145,16 @@ class JTinderPaneWrapper extends React.Component {
         let panes = new Array(this.props.paneCount)
         for (var i=0; i < this.props.paneCount; i++) {
             panes.push(
-                <Motion
-                    key={i} 
-                    defaultStyle={{xTranslateVal: 0, yTranslateVal: 0, rotationVal: 0}}
-                    style={{xTranslateVal: this.state.xTranslateArray[i], yTranslateVal: this.state.yTranslateArray[i], rotationVal: this.state.rotationArray[i]}}
-                    >
-                    {({xTranslateVal, yTranslateVal, rotationVal})=> 
-                        <JTinderPane 
-                            paneNumber={i} 
-                            transformStyle={
-                                {transform: 'translate(' +xTranslateVal+ 'px, ' +
-                                yTranslateVal + 'px) ' +
-                                'rotate('+rotationVal+'deg)'}
-                            }
-                            likeOpacity={this.state.likeOpacityArray[i]} 
-                            dislikeOpacity={this.state.dislikeOpacityArray[i]}
-                            likeStatus={this.props.likeStatusArray[i]}
-                        />}
-                </Motion>
+                <JTinderPane
+                    key={i}  
+                    paneNumber={i}
+                    xTranslateVal={this.state.xTranslateArray[i]}
+                    yTranslateVal={this.state.yTranslateArray[i]}
+                    rotationVal={this.state.rotationArray[i]}
+                    likeOpacity={this.state.likeOpacityArray[i]} 
+                    dislikeOpacity={this.state.dislikeOpacityArray[i]}
+                    likeStatus={this.props.likeStatusArray[i]}
+                />
             );
         }
 
