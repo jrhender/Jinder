@@ -17,6 +17,7 @@ class JTinderPane extends React.Component {
             <Motion
                 defaultStyle={{xTranslateVal: 0, yTranslateVal: 0, rotationVal: 0}}
                 style={{xTranslateVal: this.props.xTranslateVal, yTranslateVal: this.props.yTranslateVal, rotationVal: this.props.rotationVal}}
+                onRest={this.props.motionRestCallback}
             >
                 {({xTranslateVal, yTranslateVal, rotationVal}) => {
                     let paneStyle =

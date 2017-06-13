@@ -2,7 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import JTinderPaneWrapper from './JTinderPaneWrapper.jsx';
-import JTinderButtons from './JTinderButtons.jsx';
 
 class App extends React.Component {
 
@@ -23,7 +22,7 @@ class App extends React.Component {
         }
     }
 
-    handleLike() {
+    updatePaneStatusForLike() {
         this.setState((prevState) => {
             return {
                 currentPane : (prevState.currentPane - 1),
@@ -34,7 +33,7 @@ class App extends React.Component {
         });
     }
 
-    handleDislike() {
+    updatePaneStatusForDislike() {
         this.setState((prevState) => {
             return {
                 currentPane : (prevState.currentPane - 1),
@@ -50,16 +49,12 @@ class App extends React.Component {
             <div>
                 <JTinderPaneWrapper 
                     threshold="1" 
-                    animationRevertSpeed="200" 
-                    animationSpeed="400" 
                     paneCount={this.paneCount}
                     currentPane={this.state.currentPane}
                     likeStatusArray={this.state.likeStatusArray}
-                    handleLike = {this.handleLike.bind(this)}
-                    handleDislike = {this.handleDislike.bind(this)}
+                    updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
+                    updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
                 />
-
-                <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)}/>
             </div>
         )
     }

@@ -1,8 +1,9 @@
 import React from 'react';
 
 import JTinderPane from './JTinderPane.jsx';
+import JTinderButtons from './JTinderButtons.jsx';
 import Measure from 'react-measure';
-import {Motion} from 'react-motion';
+import {Motion, spring, presets} from 'react-motion';
 
 class JTinderPaneWrapper extends React.Component {
     
@@ -27,6 +28,7 @@ class JTinderPaneWrapper extends React.Component {
             xTranslateArray : initializingArray.map(()=>0),
             yTranslateArray : initializingArray.map(()=>0),
             rotationArray : initializingArray.map(()=>0),
+            motionRestCallbackArray : initializingArray.map(()=>{()=>undefined})
         };
 
     }
@@ -52,31 +54,9 @@ class JTinderPaneWrapper extends React.Component {
         if (opa >= 1) {
                  
             if (this.state.xTranslateArray[this.state.currentPane] > 0) {
-
-                //It's a like so show the match modal
-                //showMatchModal();
-                
-                // let paneStylesVar = this.state.paneStyles; 
-                // paneStylesVar[this.state.currentPane] = {
-                //     transform: 
-                //         'translate(' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
-                //         ' ' + 
-                //         'rotate(60deg)'
-                // } 
-                this.props.handleLike();
-                //this.nextPane();
-
+                this.handleLike();
             } else {
-
-                // let paneStylesVar = this.state.paneStyles;
-                // paneStylesVar[this.state.currentPane] = {
-                //     transform: 
-                //         'translate(-' + this.state.dimensions.pane_width + 'px, ' + (this.state.posY + this.state.dimensions.pane_width) + 'px)' +
-                //         ' ' + 
-                //         'rotate(-60deg)'
-                // } 
-                this.props.handleDislike();
-                //this.nextPane();
+                this.props.updatePaneStatusForDislike();
             }
 
         } else {
@@ -131,15 +111,31 @@ class JTinderPaneWrapper extends React.Component {
         }
     }
 
-    // nextPane() {
-    //     this.setState((prevState) => {
-    //         return {
-    //             paneStyles : prevState.paneStyles.map(function(item, index) { 
-    //                 return (index == this.props.currentPane ? {visibility: 'hidden'} : item);
-    //             }, this)
-    //         }
-    //     });
-    // }    
+    handleLike(){
+        this.setState((prevState) => {
+            return {
+                xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? spring(this.state.dimensions.width/2, presets.wobbly) : item }, this),
+                yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item} , this),
+                rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 45 : item }, this),
+                likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 1} : item}, this),
+                dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? () => this.props.updatePaneStatusForLike() : item}, this)
+            }
+        });
+    }
+
+    handleDislike(){
+        this.setState((prevState) => {
+            return {
+                xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? spring(-(this.state.dimensions.width/2), presets.wobbly) : item }, this),
+                yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item} , this),
+                rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? -45 : item }, this),
+                likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
+                dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 1} : item}, this),
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? () => this.props.updatePaneStatusForDislike() : item}, this)
+            }
+        });
+    }
 
     render() {
         let panes = new Array(this.props.paneCount)
@@ -154,41 +150,48 @@ class JTinderPaneWrapper extends React.Component {
                     likeOpacity={this.state.likeOpacityArray[i]} 
                     dislikeOpacity={this.state.dislikeOpacityArray[i]}
                     likeStatus={this.props.likeStatusArray[i]}
+                    motionRestCallback={this.state.motionRestCallbackArray[i]}
                 />
             );
         }
 
         return (
-        //start padding container
-        <div className="wrap">
+        <div>
             {
-                //start jTinder container
+                //start padding container
             }
-            <div id="slideOuter">
-            <div id="Tinderslide" 
-                onMouseDown={this.mousedown.bind(this)}
-                onMouseMove={this.mousemove.bind(this)}
-                onMouseUp={this.mouseup.bind(this)}
-            >
-            <Measure
-                onMeasure={(dimensions) => {
-                    this.setState({dimensions})
-                }}
-            >
-                <ul>
-                    {panes}
-                </ul>
-            </Measure>
-            </div>
+            <div className="wrap">
+                {
+                    //start jTinder container
+                }
+                <div id="slideOuter">
+                <div id="Tinderslide" 
+                    onMouseDown={this.mousedown.bind(this)}
+                    onMouseMove={this.mousemove.bind(this)}
+                    onMouseUp={this.mouseup.bind(this)}
+                >
+                <Measure
+                    onMeasure={(dimensions) => {
+                        this.setState({dimensions})
+                    }}
+                >
+                    <ul>
+                        {panes}
+                    </ul>
+                </Measure>
+                </div>
+                </div>
+                {
+                    //end jTinder container
+                }
             </div>
             {
-                //end jTinder container
+                //end padding container
             }
+            <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)}/>
         </div>
-        //end padding container
         );
     }
-
 }
 
 export default JTinderPaneWrapper;
