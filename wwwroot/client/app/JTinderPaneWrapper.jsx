@@ -53,10 +53,10 @@ class JTinderPaneWrapper extends React.Component {
 
         if (opa >= 1) {
                  
-            if (this.state.xTranslateArray[this.state.currentPane] > 0) {
+            if (this.state.xTranslateArray[this.props.currentPane] > 0) {
                 this.handleLike();
             } else {
-                this.props.updatePaneStatusForDislike();
+                this.handleDislike();
             }
 
         } else {
