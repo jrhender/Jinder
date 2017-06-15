@@ -3,7 +3,7 @@ import React from 'react';
 import JTinderPane from './JTinderPane.jsx';
 import JTinderButtons from './JTinderButtons.jsx';
 import Measure from 'react-measure';
-import {Motion, spring, presets} from 'react-motion';
+import {spring, presets} from 'react-motion';
 
 class JTinderPaneWrapper extends React.Component {
     
@@ -18,7 +18,6 @@ class JTinderPaneWrapper extends React.Component {
         this.state = {
             touchStart : false,
             xStart : 0, yStart : 0,
-            posX : 0, posY : 0, lastPosX : 0, lastPosY : 0,
             dimensions: {
                 width: -1,
                 height: -1
@@ -63,8 +62,6 @@ class JTinderPaneWrapper extends React.Component {
             this.setState((prevState) => {
                 return {
                     touchStart: false,
-                    lastPosX : 0,
-                    lastPosY : 0,
                     xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
                     yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
                     rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
