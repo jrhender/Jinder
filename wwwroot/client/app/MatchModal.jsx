@@ -1,6 +1,11 @@
 import React from 'react';
 
 class MatchModal extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -15,7 +20,8 @@ class MatchModal extends React.Component {
       left: 0,
       right: 0,
       backgroundColor: 'rgba(0,0,0,0.3)',
-      padding: 50
+      padding: 50,
+      zIndex: 3
     };
 
     // The modal "window"
@@ -25,13 +31,15 @@ class MatchModal extends React.Component {
       maxWidth: 500,
       minHeight: 300,
       margin: '0 auto',
-      padding: 30
+      padding: 30,
+      zIndex: 4
     };
 
     return (
       <div className="backdrop" style={backdropStyle}>
-        <div className="modal" style={modalStyle}>
-          {this.props.children}
+        <div style={modalStyle}>
+          {/*{this.props.children}*/}
+          <h3>This is my awesome modal</h3>
 
           <div className="footer">
             <button onClick={this.props.onClose}>
@@ -44,7 +52,7 @@ class MatchModal extends React.Component {
   }
 }
 
-Modal.propTypes = {
+MatchModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   show: React.PropTypes.bool,
   children: React.PropTypes.node
