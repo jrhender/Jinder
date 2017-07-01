@@ -6,6 +6,10 @@ class MatchModal extends React.Component {
     super(props);
   }
 
+  stopEventPropagation(e) {
+    e.stopPropagation();
+  }
+
   render() {
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -36,8 +40,8 @@ class MatchModal extends React.Component {
     };
 
     return (
-      <div className="backdrop" style={backdropStyle}>
-        <div style={modalStyle}>
+      <div className="backdrop" style={backdropStyle} onClick={this.props.onClose}>
+        <div style={modalStyle} onClick={this.stopEventPropagation.bind(this)}>
           {/*{this.props.children}*/}
           <h3>This is my awesome modal</h3>
 

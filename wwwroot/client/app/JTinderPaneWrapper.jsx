@@ -2,7 +2,6 @@ import React from 'react';
 
 import JTinderPane from './JTinderPane.jsx';
 import JTinderButtons from './JTinderButtons.jsx';
-import MatchModal from './MatchModal.jsx';
 import Measure from 'react-measure';
 import {spring, presets} from 'react-motion';
 
@@ -28,8 +27,7 @@ class JTinderPaneWrapper extends React.Component {
             xTranslateArray : initializingArray.map(()=>0),
             yTranslateArray : initializingArray.map(()=>0),
             rotationArray : initializingArray.map(()=>0),
-            motionRestCallbackArray : initializingArray.map(()=>{()=>undefined}),
-            isOpen : true
+            motionRestCallbackArray : initializingArray.map(()=>{()=>undefined})
         };
 
     }
@@ -136,14 +134,6 @@ class JTinderPaneWrapper extends React.Component {
         });
     }
 
-    toggleModal(){
-        this.setState((prevState) => { 
-            return {
-                isOpen: !prevState.isOpen 
-            }
-        });
-    }
-
     render() {
         let panes = new Array(this.props.paneCount)
         for (var i=0; i < this.props.paneCount; i++) {
@@ -196,7 +186,6 @@ class JTinderPaneWrapper extends React.Component {
                 //end padding container
             }
             <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)}/>
-            <MatchModal show={this.state.isOpen} onClose={this.toggleModal.bind(this)}/>
         </div>
         );
     }

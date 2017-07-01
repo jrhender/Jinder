@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import JTinderPaneWrapper from './JTinderPaneWrapper.jsx';
+import MatchModal from './MatchModal.jsx';
 
 class App extends React.Component {
 
@@ -16,6 +17,7 @@ class App extends React.Component {
 
         this.state = {
             currentPane : this.paneCount-1,
+            likeModalIsOpen : false,
 
             // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
             likeStatusArray : initializingArray
@@ -28,7 +30,8 @@ class App extends React.Component {
                 currentPane : (prevState.currentPane - 1),
                 likeStatusArray : prevState.likeStatusArray.map(function(item, index) { 
                     return (index == prevState.currentPane ? 1 : item);
-                })
+                }),
+                likeModalIsOpen: true
             }
         });
     }
@@ -39,7 +42,16 @@ class App extends React.Component {
                 currentPane : (prevState.currentPane - 1),
                 likeStatusArray : prevState.likeStatusArray.map(function(item, index) { 
                     return (index == prevState.currentPane ? -1 : item);
-                })
+                }),
+            }
+        });
+    }
+
+    toggleModal(ev){
+        this.setState((prevState) => { 
+            return {
+                //likeModalIsOpen: !prevState.likeModalIsOpen 
+                likeModalIsOpen: false
             }
         });
     }
@@ -55,6 +67,7 @@ class App extends React.Component {
                     updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                     updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
                 />
+                <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)}/>
             </div>
         )
     }
