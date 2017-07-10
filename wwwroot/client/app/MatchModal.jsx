@@ -39,6 +39,12 @@ class MatchModal extends React.Component {
       zIndex: 4
     };
 
+    const imgCircle = {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    };
+
     return (
       <div className="backdrop" style={backdropStyle} onClick={this.props.onClose}>
         <div style={modalStyle} onClick={this.stopEventPropagation.bind(this)}>
@@ -50,6 +56,12 @@ class MatchModal extends React.Component {
               Close
             </button>
           </div>
+              <h2>It's a Match!</h2>
+          <h3>You and John have liked each-other</h3>
+          <div>
+              <img className="img-circle" src="/img/pane/matchFace.jpg" style={imgCircle}/>
+              <img className="img-circle" src={"/img/pane/pane"+this.props.currentPane+".jpg"} style={imgCircle}/>
+          </div>   
         </div>
       </div>
     );

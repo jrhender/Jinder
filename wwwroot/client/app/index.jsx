@@ -67,7 +67,7 @@ class App extends React.Component {
                     updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                     updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
                 />
-                <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)}/>
+                <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)} currentPane={this.state.currentPane}/>
             </div>
         )
     }
