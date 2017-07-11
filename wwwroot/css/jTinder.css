@@ -157,7 +157,7 @@ body {
     margin-right: -4px;
 }
 
-.actions a i {
+/*.actions a i {
     display: inline-block;
     width: 40px;
     height: 80px;
@@ -173,6 +173,12 @@ body {
 
 .actions a.profile i {
     background: url("../img/happyFace.png") no-repeat scroll center center;
+}*/
+
+.actions a img {
+    display: inline-block;
+    width: 40px;
+    height: 80px;
 }
 
 .actions a {

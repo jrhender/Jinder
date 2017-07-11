@@ -10,9 +10,9 @@ class JTinderButtons extends React.Component {
         return(
             <div className="actions-wrap"> 
                 <div className="actions">
-                    <a href="#" className="profile"><i></i></a>
-                    <a href="#" className="dislike"><i onClick={this.props.handleDislike}></i></a>
-                    <a href="#" className="like"><i onClick={this.props.handleLike}></i></a>
+                    <a href="#" className="profile"><img src="../img/happyFace.png"/></a>
+                    <a href="#" className="dislike"><img onClick={this.props.handleDislike} src="../img/dislike_button.png"/></a>
+                    <a href="#" className="like"><img onClick={this.props.handleLike} src="../img/like_button.png"/></a>
                 </div>
             </div>
         )
