@@ -41,16 +41,14 @@ class MatchModal extends React.Component {
 
     const imgCircle = {
     borderRadius: 50,
-    height: 100,
-    width: 100,
+    height: '30vw',
+    width: '50%',
     };
 
     return (
       <div className="backdrop" style={backdropStyle} onClick={this.props.onClose}>
         <div style={modalStyle} onClick={this.stopEventPropagation.bind(this)}>
           {/*{this.props.children}*/}
-          <h3>This is my awesome modal</h3>
-
           <div className="footer">
             <button onClick={this.props.onClose}>
               Close
