@@ -34,18 +34,18 @@ class JTinderPaneWrapper extends React.Component {
 
     mousedown(ev) {
         if(this.state.touchStart === false) {
-            let pageXVal = ev.pageX;
-            let pageYVal = ev.pageY;
+            let pageX = typeof ev.pageX == 'undefined' ? ev.touches[0].pageX : ev.pageX;
+            let pageY = typeof ev.pageY == 'undefined' ? ev.touches[0].pageY : ev.pageY;
             this.setState((prevState) => {return {
                 touchStart : true,
-                xStart : pageXVal,
-                yStart : pageYVal
+                xStart : pageX,
+                yStart : pageY
             }});
         }
     }
 
     mouseup(ev) {
-        let pageX = (typeof ev.pageX == 'undefined') ? ev.originalEvent.changedTouches[0].pageX : ev.pageX;
+        let pageX = (typeof ev.pageX == 'undefined') ? ev.changedTouches[0].pageX : ev.pageX;
         let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
         let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);
         
@@ -74,8 +74,8 @@ class JTinderPaneWrapper extends React.Component {
 
     mousemove(ev) {
         if(this.state.touchStart === true) {
-            let pageX = typeof ev.pageX == 'undefined' ? ev.originalEvent.touches[0].pageX : ev.pageX;
-            let pageY = typeof ev.pageY == 'undefined' ? ev.originalEvent.touches[0].pageY : ev.pageY;
+            let pageX = typeof ev.pageX == 'undefined' ? ev.touches[0].pageX : ev.pageX;
+            let pageY = typeof ev.pageY == 'undefined' ? ev.touches[0].pageY : ev.pageY;
             let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
             let deltaY = parseInt(pageY) - parseInt(this.state.yStart);
             let percent = ((100 / this.state.dimensions.width) * deltaX) / this.props.paneCount;
@@ -166,6 +166,9 @@ class JTinderPaneWrapper extends React.Component {
                     onMouseDown={this.mousedown.bind(this)}
                     onMouseMove={this.mousemove.bind(this)}
                     onMouseUp={this.mouseup.bind(this)}
+                    onTouchStart={this.mousedown.bind(this)}
+                    onTouchMove={this.mousemove.bind(this)}
+                    onTouchEnd={this.mouseup.bind(this)}
                 >
                 <Measure
                     onMeasure={(dimensions) => {
