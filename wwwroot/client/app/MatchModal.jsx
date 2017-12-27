@@ -32,7 +32,7 @@ class MatchModal extends React.Component {
     const modalStyle = {
       backgroundColor: '#fff',
       borderRadius: 5,
-      maxWidth: 500,
+      width: '90%',
       minHeight: 300,
       margin: '0 auto',
       padding: 30,
@@ -40,9 +40,11 @@ class MatchModal extends React.Component {
     };
 
     const imgCircle = {
-    borderRadius: 50,
-    height: '30vw',
-    width: '50%',
+      borderRadius: 50,
+      height: '30vw',
+      width: '47%',
+      marginLeft: '5px',
+      marginRight: '5px'
     };
 
     return (
@@ -50,11 +52,11 @@ class MatchModal extends React.Component {
         <div style={modalStyle} onClick={this.stopEventPropagation.bind(this)}>
           {/*{this.props.children}*/}
           <div className="footer">
-            <button onClick={this.props.onClose}>
-              Close
-            </button>
+            <p onClick={this.props.onClose} style={{fontWeight: "bold", cursor: "pointer", textAlign: 'right' }}>
+              X
+            </p>
           </div>
-              <h2>It's a Match!</h2>
+          <h2>It's a Match!</h2>
           <h3>You and John have liked each-other</h3>
           <div>
               <img className="img-circle" src="/img/pane/matchFace.jpg" style={imgCircle}/>
