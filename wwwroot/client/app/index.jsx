@@ -8,7 +8,7 @@ class App extends React.Component {
 
     constructor() {
         super();
-        this.paneCount = 3;
+        this.paneCount = 5;
 
         let initializingArray = [];
         for(let i =0; i < this.paneCount; i++ ){

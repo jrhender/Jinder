@@ -35,16 +35,16 @@ class MatchModal extends React.Component {
       width: '90%',
       minHeight: 300,
       margin: '0 auto',
-      padding: 30,
+      padding: 20,
       zIndex: 4
     };
 
     const imgCircle = {
       borderRadius: 50,
       height: '30vw',
-      width: '47%',
-      marginLeft: '5px',
-      marginRight: '5px'
+      width: '45%',
+      marginLeft: '2%',
+      marginRight: '2%'
     };
 
     return (
@@ -56,7 +56,7 @@ class MatchModal extends React.Component {
               X
             </p>
           </div>
-          <h2>It's a Match!</h2>
+          <h2>It's a match!</h2>
           <h3>You and John have liked each-other</h3>
           <div>
               <img className="img-circle" src="/img/pane/matchFace.jpg" style={imgCircle}/>
