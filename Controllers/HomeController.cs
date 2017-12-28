@@ -65,7 +65,7 @@ namespace Jinder.Controllers
                         IsPersistent = false,
                         AllowRefresh = false
                     });
-                return RedirectToAction(nameof(HomeController.Jinder), "Home");
+                return RedirectToAction(nameof(HomeController.JinderReact), "Home");
             }
 
             // If we got this far, something failed, redisplay form
