@@ -188,7 +188,7 @@ class JTinderPaneWrapper extends React.Component {
             {
                 //end padding container
             }
-            <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)}/>
+            <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)} currentPane={this.props.currentPane}/>
         </div>
         );
     }
