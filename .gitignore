@@ -1,5 +1,6 @@
 # This folder has the actual images so don't source control
-#wwwroot/img/pane/
+#wwwroot/img/pane//
+wwwroot/client/public/bundle.js
 
 # Mac folder attribute files
 .DS_Store
@@ -272,3 +273,4 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+
