@@ -9,17 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jrhender/Jinder.git/"
+    "url": "https://github.com/jrhender/Jinder/"
   },
   "author": "John Henderson",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^5.5.7",
+    "firebaseui": "^3.4.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-measure": "^1.4.6",
     "react-motion": "^0.5.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.0"
+    "@babel/core": "^7.1.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
   }
 }
