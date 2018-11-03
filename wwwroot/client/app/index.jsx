@@ -8,13 +8,21 @@ class App extends React.Component {
 
     constructor() {
         super();
+        this.handleSignInChange = this.handleSignInChange.bind(this);
+        this.state = {
+            isSignedIn: false // Local signed-in state.
+        };
+    }
+
+    handleSignInChange(newSignInState) {
+        this.setState({isSignedIn : newSignInState});
     }
 
     render () {
         return (
             <div>
-                <Login/>
-                <JTinderWrapper/>
+                <Login isSignedIn={this.state.isSignedIn} handleSignInChange={this.handleSignInChange}/>
+                <JTinderWrapper isSignedIn={this.state.isSignedIn}/>
             </div>
         )
     }

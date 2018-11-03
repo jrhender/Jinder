@@ -77,19 +77,26 @@ class JTinderWrapper extends React.Component {
     }
 
     render () {
-        return (
-            <div>
-                <JTinderPaneWrapper 
-                    threshold="1" 
-                    paneCount={this.paneCount}
-                    currentPane={this.state.currentPane}
-                    likeStatusArray={this.state.likeStatusArray}
-                    updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
-                    updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                />
-                <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)} currentPane={this.state.currentPane+1}/>
-            </div>
-        )
+        if (this.props.isSignedIn) {
+            return (
+                <div>
+                    <JTinderPaneWrapper 
+                        threshold="1" 
+                        paneCount={this.paneCount}
+                        currentPane={this.state.currentPane}
+                        likeStatusArray={this.state.likeStatusArray}
+                        updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
+                        updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
+                    />
+                    <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)} currentPane={this.state.currentPane+1}/>
+                </div>
+            )
+        }
+        else {
+            return(
+                <div/>
+            )
+        }
     }
 }
 

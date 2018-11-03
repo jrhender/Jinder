@@ -8,24 +8,28 @@ const uiConfig = {
     // We will display Google and Facebook as auth providers.
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ]
+    ],
+    callbacks: {
+        // Avoid redirects after sign-in.
+        signInSuccessWithAuthResult: () => false
+      }
   };
 
 class Login extends React.Component {
 
     constructor() {
         super();
-
-        // The component's Local state.
-        this.state = {
-            isSignedIn: false // Local signed-in state.
-        };
     }
 
     // Listen to the Firebase Auth state and set the local state.
     componentDidMount() {
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-            (user) => this.setState({isSignedIn: !!user})
+            (user) => {
+                if(user !== undefined) {
+                    var newState = !!user;
+                    this.props.handleSignInChange(newState);
+                }
+            }
         );
     }
 
@@ -35,23 +39,24 @@ class Login extends React.Component {
     }
 
     render() {
-        if (!this.state.isSignedIn) {
+        if (!this.props.isSignedIn) {
             return (
             <div>
-                <h1>Welcome To Jinder!</h1>
+                <h1 style={loginStyle}>Welcome To Jinder!</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
             );
         }
         return (
             <div>
-                <h1>My App</h1>
                 <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
                 <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
             </div>
         );
     }
 }
+
+var loginStyle = { 'text-align' : 'center' };
 
 Login.propTypes = {
 };
