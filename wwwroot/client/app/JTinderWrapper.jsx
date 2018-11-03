@@ -79,7 +79,7 @@ class JTinderWrapper extends React.Component {
     render () {
         if (this.props.isSignedIn) {
             return (
-                <div>
+                <div className="customStyle">
                     <JTinderPaneWrapper 
                         threshold="1" 
                         paneCount={this.paneCount}
