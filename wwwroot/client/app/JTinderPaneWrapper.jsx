@@ -111,6 +111,7 @@ class JTinderPaneWrapper extends React.Component {
     handleLike(){
         this.setState((prevState) => {
             return {
+                touchStart : false,
                 xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? spring(this.state.dimensions.width/2, presets.wobbly) : item }, this),
                 yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item} , this),
                 rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 45 : item }, this),
@@ -124,6 +125,7 @@ class JTinderPaneWrapper extends React.Component {
     handleDislike(){
         this.setState((prevState) => {
             return {
+                touchStart : false,
                 xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? spring(-(this.state.dimensions.width/2), presets.wobbly) : item }, this),
                 yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item} , this),
                 rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? -45 : item }, this),
