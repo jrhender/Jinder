@@ -117,7 +117,13 @@ class JTinderPaneWrapper extends React.Component {
                 rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 45 : item }, this),
                 likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 1} : item}, this),
                 dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
-                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? () => this.props.updatePaneStatusForLike() : item}, this)
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(
+                    function(item, index) {
+                        return index == this.props.currentPane ? () => {
+                            this.setPaneToInitialState();
+                            this.props.updatePaneStatusForLike();
+                    } : item},
+                this)
             }
         });
     }
@@ -131,9 +137,34 @@ class JTinderPaneWrapper extends React.Component {
                 rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? -45 : item }, this),
                 likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 0} : item}, this),
                 dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {opacity: 1} : item}, this),
-                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? () => this.props.updatePaneStatusForDislike() : item}, this)
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(
+                    function(item, index) {
+                        return index == this.props.currentPane ? () => {
+                            this.setPaneToInitialState();
+                            this.props.updatePaneStatusForDislike();
+                    } : item},
+                this)
             }
         });
+    }
+
+    setPaneToInitialState(){
+        this.setState((prevState) => {
+            return {
+                xTranslateArray: prevState.xTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
+                yTranslateArray: prevState.yTranslateArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item} , this),
+                rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
+                likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this),
+                dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this),
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this)
+            }
+        });
+        // likeOpacityArray : initializingArray,
+        //     dislikeOpacityArray : initializingArray,
+        //     xTranslateArray : initializingArray.map(()=>0),
+        //     yTranslateArray : initializingArray.map(()=>0),
+        //     rotationArray : initializingArray.map(()=>0),
+        //     motionRestCallbackArray : initializingArray.map(()=>{()=>undefined})
     }
 
     render() {
