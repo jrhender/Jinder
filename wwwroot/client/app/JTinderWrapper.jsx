@@ -24,11 +24,11 @@ class JTinderWrapper extends React.Component {
     }
 
     updatePaneStatusForLike() {
-        let newPaneCount = this.getNewPaneCount();
+        let paneNumberOfNewCurrentPane = this.getNumberOfNewCurrentPane();
         let newLikeStatusArray = this.getNewLikeStatusArray();
         this.setState((prevState) => {
             return {
-                currentPane : newPaneCount,
+                currentPane : paneNumberOfNewCurrentPane,
                 likeStatusArray : newLikeStatusArray,
                 likeModalIsOpen: true
             }
@@ -36,22 +36,22 @@ class JTinderWrapper extends React.Component {
     }
 
     updatePaneStatusForDislike() {
-        let newPaneCount = this.getNewPaneCount();
+        let paneNumberOfNewCurrentPane = this.getNumberOfNewCurrentPane();
         let newLikeStatusArray = this.getNewLikeStatusArray();
         this.setState((prevState) => {
             return {
-                currentPane : newPaneCount,
+                currentPane : paneNumberOfNewCurrentPane,
                 likeStatusArray : newLikeStatusArray,
             }
         });
     }
 
-    getNewPaneCount() {
+    getNumberOfNewCurrentPane() {
         if (this.state.currentPane != 0) {
             return this.state.currentPane - 1
         }
         else {
-            return this.paneCount - 1
+            return this.paneCount - 1 //Go back to the beginning
         }
     }
     
