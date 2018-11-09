@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 
 import JTinderWrapper from './JTinderWrapper.jsx';
 import Login from './Login.jsx';
+import FirebaseImage from './FirebaseImage.jsx';
 
 class App extends React.Component {
 
