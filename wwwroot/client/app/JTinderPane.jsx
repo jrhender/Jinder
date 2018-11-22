@@ -7,7 +7,7 @@ class JTinderPane extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageUrl: "../img/pane/matchFace.jpg"
+            imageUrl: null
         };
     }
 
@@ -54,7 +54,10 @@ class JTinderPane extends React.Component {
                     }
                     return(
                         <li className={"pane"+paneNumber} style={paneStyle}>
-                            <div className="img" style={{backgroundImage: `url(${this.state.imageUrl})`}}></div>
+                            <div 
+                                className="img" 
+                                style={this.state.imageUrl ? {backgroundImage: `url(${this.state.imageUrl})`} : {}}
+                            />
                             <div className="like" style={likeOpacity}></div>
                             <div className="dislike" style={dislikeOpacity}></div>
                         </li>
