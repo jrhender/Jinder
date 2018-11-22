@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/storage';
 // Initialize Firebase
 const config = {
     apiKey: "AIzaSyDGkmGcCvF-zuTrfmHWKmeTy_wO0pRcG9c",
@@ -10,3 +12,6 @@ const config = {
 };
 firebase.initializeApp(config);
 export default firebase;
+
+// Good SO thread on the background on this file:
+// https://stackoverflow.com/questions/53139432/importing-only-auth-package-from-firebase-module?noredirect=1&lq=1
