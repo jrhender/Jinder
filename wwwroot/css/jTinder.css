@@ -201,23 +201,23 @@ body {
 
 /* jTinder images */
 #Tinderslide .pane4 .img {
-    background: url("../img/pane/pane4.jpg") no-repeat scroll center center;
+    background: no-repeat scroll center center;
     background-size: cover;
 }
 #Tinderslide .pane3 .img {
-    background: url("../img/pane/pane3.jpg") no-repeat scroll center center;
+    background: no-repeat scroll center center;
     background-size: cover;
 }
 #Tinderslide .pane2 .img {
-    background: url("../img/pane/pane2.jpg") no-repeat scroll center center;
+    background: no-repeat scroll center center;
     background-size: cover;
 }
 #Tinderslide .pane1 .img {
-    background: url("../img/pane/pane1.jpg") no-repeat scroll center center;
+    background: no-repeat scroll center center;
     background-size: cover;
 }
 #Tinderslide .pane0 .img {
-    background: url("../img/pane/pane0.jpg") no-repeat scroll center center;
+    background: no-repeat scroll center center;
     background-size: cover;
 }
 
