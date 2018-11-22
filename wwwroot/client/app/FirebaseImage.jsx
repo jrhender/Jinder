@@ -5,24 +5,36 @@ class FirebaseImage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            imageUrl: null
+        };
+    }
+
+    componentDidMount() {
+        this.loadImageFromFirebase();
     }
 
     loadImageFromFirebase() {
         // Points to the root reference
-        var storageRef = firebase.storage().ref();
+        let storageRef = firebase.storage().ref();
 
         // Points to 'images'
-        var paneImagesRef = storageRef.child('paneImages');
+        let paneImagesRef = storageRef.child('paneImages');
 
         // Points to 'images/space.jpg'
         // Note that you can use variables to create child values
-        var fileName = 'pane0.jpg';
-        return paneRef = paneImagesRef.child(fileName);
+        let fileName = 'pane0.jpg';
+        let paneRef = paneImagesRef.child(fileName);
+        paneRef.getDownloadURL().then(url => {
+            this.setState({
+                imageUrl: url
+            });
+        });
     }
 
     render() {
         return(
-            <img src={this.loadImageFromFirebase().bind(this) || ""}/>
+            <img src={this.state.imageUrl || ""}/>
         )
                                 
     }

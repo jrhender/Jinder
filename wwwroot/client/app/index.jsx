@@ -24,6 +24,7 @@ class App extends React.Component {
             <div>
                 <Login isSignedIn={this.state.isSignedIn} handleSignInChange={this.handleSignInChange}/>
                 <JTinderWrapper isSignedIn={this.state.isSignedIn}/>
+                <FirebaseImage />
             </div>
         )
     }
