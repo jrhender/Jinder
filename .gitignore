@@ -275,4 +275,4 @@ __pycache__/
 # tools/
 
 stats.json
-wwwroot/client/public/main.js.map
+wwwroot/client/public/

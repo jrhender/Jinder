@@ -8,7 +8,12 @@ var config = {
     entry: APP_DIR + '/index.jsx',
     output: {
         path: BUILD_DIR,
-        filename: 'bundle.js'
+        filename: '[name].js'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     module : {
         rules : [
@@ -23,7 +28,7 @@ var config = {
     plugins: [
         new webpack.SourceMapDevToolPlugin({
             filename: '[name].js.map',
-            exclude: ['vendor.js']
+            exclude: ['vendors~main.js']
         })
     ]
 };
