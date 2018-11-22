@@ -10,7 +10,6 @@ var config = {
         path: BUILD_DIR,
         filename: 'bundle.js'
     },
-    devtool: 'eval-source-map',
     module : {
         rules : [
         {
@@ -19,7 +18,14 @@ var config = {
             loader : 'babel-loader'
         }
         ]
-    }
+    },
+    devtool: false,
+    plugins: [
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[name].js.map',
+            exclude: ['vendor.js']
+        })
+    ]
 };
 
 module.exports = config;
