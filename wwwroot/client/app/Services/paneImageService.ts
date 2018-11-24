@@ -9,9 +9,9 @@ const getPaneImageUrl = () => {
 
     // Points to 'images/space.jpg'
     // Note that you can use variables to create child values
-    let fileName = 'pane0.jpg';
+    let fileName : string = 'pane0.jpg';
     let paneRef = paneImagesRef.child(fileName);
-    let downloadURLPromise = paneRef.getDownloadURL();
+    let downloadURLPromise : Promise<string> = paneRef.getDownloadURL();
     return downloadURLPromise;
 }
 

@@ -17,12 +17,20 @@ var config = {
     },
     module : {
         rules : [
-        {
-            test : /\.jsx?/,
-            include : APP_DIR,
-            loader : 'babel-loader'
-        }
+            {
+                test : /\.jsx?/,
+                include : APP_DIR,
+                loader : 'babel-loader'
+            },
+            {
+                test: /\.tsx?$/,
+                include : APP_DIR,
+                use: 'ts-loader'
+            }
         ]
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.jsx', '.js' ]
     },
     devtool: false,
     plugins: [
