@@ -1,6 +1,6 @@
 import React from 'react';
 import {Motion} from 'react-motion';
-import firebase from '../../../firebaseInitialization';
+import paneImageService from '../Services/paneImageService';
 
 class JTinderPane extends React.Component {
 
@@ -12,21 +12,7 @@ class JTinderPane extends React.Component {
     }
 
     componentDidMount() {
-        this.loadImageFromFirebase();
-    }
-
-    loadImageFromFirebase() {
-        // Points to the root reference
-        let storageRef = firebase.storage().ref();
-
-        // Points to 'images'
-        let paneImagesRef = storageRef.child('paneImages');
-
-        // Points to 'images/space.jpg'
-        // Note that you can use variables to create child values
-        let fileName = 'pane0.jpg';
-        let paneRef = paneImagesRef.child(fileName);
-        paneRef.getDownloadURL().then(url => {
+        paneImageService.getPaneImageUrl().then(url => {
             this.setState({
                 imageUrl: url
             });
