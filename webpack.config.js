@@ -5,7 +5,7 @@ var BUILD_DIR = path.resolve(__dirname, 'wwwroot/client/public');
 var APP_DIR = path.resolve(__dirname, 'wwwroot/client/app');
 
 var config = {
-    entry: APP_DIR + '/index.jsx',
+    entry: APP_DIR + '/Components/index.jsx',
     output: {
         path: BUILD_DIR,
         filename: '[name].js'

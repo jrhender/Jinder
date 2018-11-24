@@ -1,6 +1,6 @@
 import React from 'react';
 import {Motion} from 'react-motion';
-import firebase from '../../firebaseInitialization';
+import firebase from '../../../firebaseInitialization';
 
 class JTinderPane extends React.Component {
 
