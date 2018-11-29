@@ -159,12 +159,6 @@ class JTinderPaneWrapper extends React.Component {
                 motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this)
             }
         });
-        // likeOpacityArray : initializingArray,
-        //     dislikeOpacityArray : initializingArray,
-        //     xTranslateArray : initializingArray.map(()=>0),
-        //     yTranslateArray : initializingArray.map(()=>0),
-        //     rotationArray : initializingArray.map(()=>0),
-        //     motionRestCallbackArray : initializingArray.map(()=>{()=>undefined})
     }
 
     render() {

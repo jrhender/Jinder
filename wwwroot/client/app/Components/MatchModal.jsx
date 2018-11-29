@@ -1,13 +1,25 @@
 import React from 'react';
+import paneImageService from '../Services/paneImageService';
 
 class MatchModal extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      imageUrl: null
+    };
   }
 
   stopEventPropagation(e) {
     e.stopPropagation();
+  }
+
+  componentDidMount() {
+    paneImageService.getPaneImageUrl().then(url => {
+        this.setState({
+            imageUrl: url
+        });
+    });
   }
 
   render() {
@@ -60,7 +72,8 @@ class MatchModal extends React.Component {
           <h3>You and John have liked each-other</h3>
           <div>
               <img className="img-circle" src="img/pane/matchFace.jpg" style={imgCircle}/>
-              <img className="img-circle" src={"img/pane/pane"+this.props.currentPane+".jpg"} style={imgCircle}/>
+              {/* <img className="img-circle" src={"img/pane/pane"+this.props.currentPane+".jpg"} style={imgCircle}/> */}
+              <img className="img-circle" src={this.state.imageUrl ? this.state.imageUrl : ""} style={imgCircle}/>
           </div>   
         </div>
       </div>
@@ -71,7 +84,7 @@ class MatchModal extends React.Component {
 MatchModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   show: React.PropTypes.bool,
-  children: React.PropTypes.node
+  currentPane: React.PropTypes.number
 };
 
 export default MatchModal;

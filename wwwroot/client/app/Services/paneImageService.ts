@@ -1,6 +1,6 @@
 import firebase from '../../../firebaseInitialization';
 
-const getPaneImageUrl = () => {
+const getPaneImageUrl = (paneNumber : number) => {
     // Points to the root reference
     let storageRef = firebase.storage().ref();
 
