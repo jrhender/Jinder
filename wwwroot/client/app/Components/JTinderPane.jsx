@@ -1,22 +1,10 @@
 import React from 'react';
 import {Motion} from 'react-motion';
-import paneImageService from '../Services/paneImageService';
 
 class JTinderPane extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            imageUrl: null
-        };
-    }
-
-    componentDidMount() {
-        paneImageService.getPaneImageUrl().then(url => {
-            this.setState({
-                imageUrl: url
-            });
-        });
     }
 
     render() {
@@ -42,7 +30,7 @@ class JTinderPane extends React.Component {
                         <li className={"pane"+paneNumber} style={paneStyle}>
                             <div 
                                 className="img" 
-                                style={this.state.imageUrl ? {backgroundImage: `url(${this.state.imageUrl})`} : {}}
+                                style={this.props.imageUrl ? {backgroundImage: `url(${this.props.imageUrl})`} : {}}
                             />
                             <div className="like" style={likeOpacity}></div>
                             <div className="dislike" style={dislikeOpacity}></div>

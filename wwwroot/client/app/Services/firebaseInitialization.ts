@@ -1,6 +1,8 @@
-import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/storage';
+import 'firebase/firestore';
+
 // Initialize Firebase
 const config = {
     apiKey: "AIzaSyDGkmGcCvF-zuTrfmHWKmeTy_wO0pRcG9c",
@@ -11,6 +13,14 @@ const config = {
     messagingSenderId: "1020303948089"
 };
 firebase.initializeApp(config);
+
+let firestoreDB = firebase.firestore();
+// Disable deprecated features
+firestoreDB.settings({
+    timestampsInSnapshots: true
+});
+
+export {firestoreDB};
 export default firebase;
 
 // Good SO thread on the background on this file:

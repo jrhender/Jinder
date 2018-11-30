@@ -1,4 +1,5 @@
-import firebase from '../../../firebaseInitialization';
+import {firestoreDB} from './firebaseInitialization';
+import firebase from './firebaseInitialization';
 
 const getPaneImageUrl = (paneNumber : number) => {
     // Points to the root reference
@@ -15,8 +16,29 @@ const getPaneImageUrl = (paneNumber : number) => {
     return downloadURLPromise;
 }
 
+const getImagesOfCurrentUser = () => {
+    let imageUrls : string[] = new Array();
+    let currentUserID : string = firebase.auth().currentUser.uid;
+    let jinderImagesRef = firestoreDB.collection("JinderImages");
+    let userImagesQuery = jinderImagesRef.where("UserID","==",currentUserID);
+    return new Promise<string[]>((resolve, reject) => {
+        userImagesQuery.get()
+            .then((querySnapshop : any) => {
+                querySnapshop.forEach((doc : any) => {
+                    imageUrls.push(doc.data().ImageUrl);
+                })
+                return resolve(imageUrls)
+            })
+            .catch((error : string) => {
+                console.log("Error getting documents: ", error);
+                return reject("Error getting documents: " + error);
+        });
+    });
+}
+
 const paneImageService = {
-    getPaneImageUrl
+    getPaneImageUrl,
+    getImagesOfCurrentUser
 }
 
 export default paneImageService;

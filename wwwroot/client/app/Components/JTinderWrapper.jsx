@@ -3,6 +3,8 @@ import React from 'react';
 import JTinderPaneWrapper from './JTinderPaneWrapper.jsx';
 import MatchModal from './MatchModal.jsx';
 
+import paneImageService from '../Services/paneImageService';
+
 class JTinderWrapper extends React.Component {
 
     constructor() {
@@ -17,9 +19,21 @@ class JTinderWrapper extends React.Component {
         this.state = {
             currentPane : this.paneCount-1,
             likeModalIsOpen : false,
-
             // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
-            likeStatusArray : this.initializingArray
+            likeStatusArray : this.initializingArray,
+
+            imagesAreLoaded: false
+        }
+    }
+
+    componentDidUpdate() {
+        if(this.props.isSignedIn && this.state.imagesAreLoaded === false) {
+            paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
+                this.setState({
+                    imageUrls: returnedImageUrls,
+                    imagesAreLoaded: true
+                });
+            });
         }
     }
 
@@ -87,8 +101,13 @@ class JTinderWrapper extends React.Component {
                         likeStatusArray={this.state.likeStatusArray}
                         updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                         updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
+                        imageUrls = {this.state.imageUrls}
                     />
-                    <MatchModal show={this.state.likeModalIsOpen} onClose={this.toggleModal.bind(this)} currentPane={this.state.currentPane+1}/>
+                    <MatchModal 
+                        show={this.state.likeModalIsOpen}
+                        onClose={this.toggleModal.bind(this)}
+                        currentPane={this.state.currentPane+1}                        
+                    />
                 </div>
             )
         }
