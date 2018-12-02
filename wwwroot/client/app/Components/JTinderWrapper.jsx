@@ -106,7 +106,9 @@ class JTinderWrapper extends React.Component {
                     <MatchModal 
                         show={this.state.likeModalIsOpen}
                         onClose={this.toggleModal.bind(this)}
-                        currentPane={this.state.currentPane+1}                        
+                        currentPane={this.state.currentPane+1}
+                        imageUrl = {this.state.imageUrls != undefined ? 
+                            this.state.imageUrls[this.state.currentPane] : ""}                        
                     />
                 </div>
             )
