@@ -175,7 +175,7 @@ class JTinderPaneWrapper extends React.Component {
                     dislikeOpacity={this.state.dislikeOpacityArray[i]}
                     likeStatus={this.props.likeStatusArray[i]}
                     motionRestCallback={this.state.motionRestCallbackArray[i]}
-                    imageUrl = {this.props.imageUrls != undefined ? this.props.imageUrls[0] : ""} 
+                    imageUrl = {this.props.imageUrls != undefined ? this.props.imageUrls[i] : ""} 
                 />
             );
         }

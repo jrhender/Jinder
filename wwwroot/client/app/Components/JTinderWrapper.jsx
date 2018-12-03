@@ -9,19 +9,9 @@ class JTinderWrapper extends React.Component {
 
     constructor() {
         super();
-        this.paneCount = 5;
-
-        this.initializingArray = [];
-        for(let i =0; i < this.paneCount; i++ ){
-            this.initializingArray.push(0);
-        }
 
         this.state = {
-            currentPane : this.paneCount-1,
             likeModalIsOpen : false,
-            // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
-            likeStatusArray : this.initializingArray,
-
             imagesAreLoaded: false
         }
     }
@@ -29,10 +19,29 @@ class JTinderWrapper extends React.Component {
     componentDidUpdate() {
         if(this.props.isSignedIn && this.state.imagesAreLoaded === false) {
             paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
-                this.setState({
-                    imageUrls: returnedImageUrls,
-                    imagesAreLoaded: true
-                });
+
+                if(returnedImageUrls.count > 0) {
+                    this.initializingArray = [];
+                    for(let i =0; i < this.paneCount; i++ ){
+                        this.initializingArray.push(0);
+                    }
+
+                    this.paneCount = returnedImageUrls.count;
+                    
+                    this.setState({
+                        imageUrls: returnedImageUrls,
+                        currentPane: this.paneCount - 1,
+                        // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
+                        likeStatusArray : this.initializingArray,
+                        imagesAreLoaded: true
+                    });
+                }
+                else
+                {
+                    this.setState({
+                        imagesAreLoaded: true
+                    });
+                }
             });
         }
     }
@@ -92,26 +101,42 @@ class JTinderWrapper extends React.Component {
 
     render () {
         if (this.props.isSignedIn) {
-            return (
-                <div className="customStyle">
-                    <JTinderPaneWrapper 
-                        threshold="1" 
-                        paneCount={this.paneCount}
-                        currentPane={this.state.currentPane}
-                        likeStatusArray={this.state.likeStatusArray}
-                        updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
-                        updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                        imageUrls = {this.state.imageUrls}
-                    />
-                    <MatchModal 
-                        show={this.state.likeModalIsOpen}
-                        onClose={this.toggleModal.bind(this)}
-                        currentPane={this.state.currentPane+1}
-                        imageUrl = {this.state.imageUrls != undefined ? 
-                            this.state.imageUrls[this.state.currentPane] : ""}                        
-                    />
-                </div>
-            )
+            if(this.state.imagesAreLoaded){
+                if(this.state.paneCount > 0) {
+                    return (
+                        <div className="customStyle">
+                            <JTinderPaneWrapper 
+                                threshold="1" 
+                                paneCount={this.state.paneCount}
+                                currentPane={this.state.currentPane}
+                                likeStatusArray={this.state.likeStatusArray}
+                                updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
+                                updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
+                                imageUrls = {this.state.imageUrls}
+                            />
+                            <MatchModal 
+                                show={this.state.likeModalIsOpen}
+                                onClose={this.toggleModal.bind(this)}
+                                currentPane={this.state.currentPane+1}
+                                imageUrl = {this.state.imageUrls != undefined ? 
+                                    this.state.imageUrls[this.state.currentPane] : ""}                        
+                            />
+                        </div>
+                    )
+                }
+                else {
+                    <div>
+                        <p>You have no love options :(</p>
+                    </div>
+                }
+            }
+            else{
+                return (
+                    <div>
+                        <p>Profiles have not loaded yet (wannabe loading gif)</p>
+                    </div>
+                )
+            }
         }
         else {
             return(
