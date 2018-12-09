@@ -9,37 +9,34 @@ class JTinderWrapper extends React.Component {
 
     constructor() {
         super();
-
         this.state = {
-            likeModalIsOpen : false,
-            imagesAreLoaded: false
-        }
+            imagesAreLoaded : false
+        };
     }
 
     componentDidUpdate() {
         if(this.props.isSignedIn && this.state.imagesAreLoaded === false) {
             paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
-
-                if(returnedImageUrls.count > 0) {
+                if(returnedImageUrls.length > 0) {
                     this.initializingArray = [];
                     for(let i =0; i < this.paneCount; i++ ){
                         this.initializingArray.push(0);
                     }
 
-                    this.paneCount = returnedImageUrls.count;
+                    this.paneCount = returnedImageUrls.length;
                     
                     this.setState({
                         imageUrls: returnedImageUrls,
                         currentPane: this.paneCount - 1,
                         // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
                         likeStatusArray : this.initializingArray,
-                        imagesAreLoaded: true
+                        imagesAreLoaded : true
                     });
                 }
                 else
                 {
                     this.setState({
-                        imagesAreLoaded: true
+                        imagesAreLoaded : true
                     });
                 }
             });
@@ -102,12 +99,12 @@ class JTinderWrapper extends React.Component {
     render () {
         if (this.props.isSignedIn) {
             if(this.state.imagesAreLoaded){
-                if(this.state.paneCount > 0) {
+                if(this.paneCount > 0) {
                     return (
                         <div className="customStyle">
                             <JTinderPaneWrapper 
                                 threshold="1" 
-                                paneCount={this.state.paneCount}
+                                paneCount={this.paneCount}
                                 currentPane={this.state.currentPane}
                                 likeStatusArray={this.state.likeStatusArray}
                                 updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
@@ -125,9 +122,11 @@ class JTinderWrapper extends React.Component {
                     )
                 }
                 else {
-                    <div>
-                        <p>You have no love options :(</p>
-                    </div>
+                    return (
+                        <div>
+                            <p>You have no love options :(</p>
+                        </div>
+                    )
                 }
             }
             else{
