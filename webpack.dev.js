@@ -12,7 +12,7 @@ module.exports = merge(common, {
       })
   ],
   devServer: {
-    contentBase: './wwwroot',
+    contentBase: './client/public',
     watchContentBase: true
   }
 });
