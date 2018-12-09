@@ -49,7 +49,6 @@ class JTinderPaneWrapper extends React.Component {
         let deltaX = parseInt(pageX) - parseInt(this.state.xStart);
         let opa = Math.abs((Math.abs(deltaX) / this.props.threshold) / 100 + 0.2);
         
-
         if (opa >= 1) {
                  
             if (this.state.xTranslateArray[this.props.currentPane] > 0) {
@@ -156,7 +155,7 @@ class JTinderPaneWrapper extends React.Component {
                 rotationArray: prevState.rotationArray.map(function(item, index) {return index == this.props.currentPane ? 0 : item }, this),
                 likeOpacityArray : prevState.likeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this),
                 dislikeOpacityArray : prevState.dislikeOpacityArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this),
-                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? {} : item}, this)
+                motionRestCallbackArray : prevState.motionRestCallbackArray.map(function(item, index) {return index == this.props.currentPane ? ()=>{()=>undefined} : item}, this)
             }
         });
     }
