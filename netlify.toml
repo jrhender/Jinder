@@ -1,0 +1,4 @@
+[build]
+base = "wwwroot/"
+publish = "client/app/public/"
+command = "npm build"
