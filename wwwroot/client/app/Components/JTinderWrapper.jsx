@@ -132,7 +132,7 @@ class JTinderWrapper extends React.Component {
             else{
                 return (
                     <div>
-                        <p>Profiles have not loaded yet (wannabe loading gif)</p>
+                        <p>Profiles have not loaded yet... (wannabe loading gif)</p>
                     </div>
                 )
             }

@@ -1,10 +1,10 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'wwwroot/client/public');
-var APP_DIR = path.resolve(__dirname, 'wwwroot/client/app');
+const BUILD_DIR = path.resolve(__dirname, 'wwwroot/client/public');
+const APP_DIR = path.resolve(__dirname, 'wwwroot/client/app');
 
-var config = {
+let config = {
     entry: APP_DIR + '/Components/index.jsx',
     output: {
         path: BUILD_DIR,
@@ -32,13 +32,6 @@ var config = {
     resolve: {
         extensions: [ '.tsx', '.ts', '.jsx', '.js' ]
     },
-    devtool: false,
-    plugins: [
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[name].js.map',
-            exclude: ['vendors~main.js']
-        })
-    ]
 };
 
 module.exports = config;
