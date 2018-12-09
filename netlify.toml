@@ -1,4 +1,4 @@
 [build]
 base = "wwwroot/"
-publish = "client/public/"
+publish = "wwwroot/client/public/"
 command = "npm build"
