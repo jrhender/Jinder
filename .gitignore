@@ -275,4 +275,5 @@ __pycache__/
 # tools/
 
 stats.json
-wwwroot/client/public/
+client/public/scripts/*
+
