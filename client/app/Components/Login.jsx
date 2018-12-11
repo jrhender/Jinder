@@ -5,7 +5,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
-    credentialHelper: 'NONE',
+    credentialHelper: 'none',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
@@ -42,7 +42,7 @@ class Login extends React.Component {
         if (!this.props.isSignedIn) {
             return (
             <div>
-                <h1 style={loginStyle}>Welcome To Jinder - TestChange!</h1>
+                <h1 style={loginStyle}>Welcome To Jinder!</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
             );
