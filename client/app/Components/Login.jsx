@@ -6,6 +6,7 @@ const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
     'credentialHelper': firebaseui.auth.CredentialHelper.NONE,
+    'accountChooserEnabled': false,
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
