@@ -12,6 +12,7 @@ module.exports = merge(common, {
       })
   ],
   devServer: {
+    publicPath: '/scripts/',
     contentBase: './client/public',
     watchContentBase: true
   }
