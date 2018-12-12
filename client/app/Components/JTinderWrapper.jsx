@@ -14,8 +14,8 @@ class JTinderWrapper extends React.Component {
         };
     }
 
-    componentDidUpdate() {
-        if(this.props.isSignedIn && this.state.imagesAreLoaded === false) {
+    componentDidMount() {
+        if(this.state.imagesAreLoaded === false) {
             paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
                 if(returnedImageUrls.length > 0) {
                     this.initializingArray = [];
@@ -97,49 +97,42 @@ class JTinderWrapper extends React.Component {
     }
 
     render () {
-        if (this.props.isSignedIn) {
-            if(this.state.imagesAreLoaded){
-                if(this.paneCount > 0) {
-                    return (
-                        <div className="customStyle">
-                            <JTinderPaneWrapper 
-                                threshold="1" 
-                                paneCount={this.paneCount}
-                                currentPane={this.state.currentPane}
-                                likeStatusArray={this.state.likeStatusArray}
-                                updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
-                                updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                                imageUrls = {this.state.imageUrls}
-                            />
-                            <MatchModal 
-                                show={this.state.likeModalIsOpen}
-                                onClose={this.toggleModal.bind(this)}
-                                currentPane={this.state.currentPane+1}
-                                imageUrl = {this.state.imageUrls != undefined ? 
-                                    this.state.imageUrls[this.state.currentPane] : ""}                        
-                            />
-                        </div>
-                    )
-                }
-                else {
-                    return (
-                        <div>
-                            <p>You have no love options :(</p>
-                        </div>
-                    )
-                }
+        if(this.state.imagesAreLoaded){
+            if(this.paneCount > 0) {
+                return (
+                    <div className="customStyle">
+                        <JTinderPaneWrapper 
+                            threshold="1" 
+                            paneCount={this.paneCount}
+                            currentPane={this.state.currentPane}
+                            likeStatusArray={this.state.likeStatusArray}
+                            updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
+                            updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
+                            imageUrls = {this.state.imageUrls}
+                        />
+                        <MatchModal 
+                            show={this.state.likeModalIsOpen}
+                            onClose={this.toggleModal.bind(this)}
+                            currentPane={this.state.currentPane+1}
+                            imageUrl = {this.state.imageUrls != undefined ? 
+                                this.state.imageUrls[this.state.currentPane] : ""}                        
+                        />
+                    </div>
+                )
             }
-            else{
+            else {
                 return (
                     <div>
-                        <p>Profiles have not loaded yet... (wannabe loading gif)</p>
+                        <p>You have no love options :(</p>
                     </div>
                 )
             }
         }
-        else {
-            return(
-                <div/>
+        else{
+            return (
+                <div>
+                    <p>Profiles have not loaded yet... (wannabe loading gif)</p>
+                </div>
             )
         }
     }

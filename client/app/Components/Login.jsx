@@ -49,8 +49,8 @@ class Login extends React.Component {
         }
         return (
             <div>
-                <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-                <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+                {/* <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+                <a onClick={() => firebase.auth().signOut()}>Sign-out</a> */}
             </div>
         );
     }

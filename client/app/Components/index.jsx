@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import JTinderWrapper from './JTinderWrapper.jsx';
+import CoreFunctionality from './CoreFunctionality.jsx';
 import Login from './Login.jsx';
 
 class App extends React.Component {
@@ -20,9 +20,9 @@ class App extends React.Component {
 
     render () {
         return (
-            <div>
+            <div style={{textAlign: 'center'}}>
                 <Login isSignedIn={this.state.isSignedIn} handleSignInChange={this.handleSignInChange}/>
-                <JTinderWrapper isSignedIn={this.state.isSignedIn}/>
+                <CoreFunctionality isSignedIn={this.state.isSignedIn} />
             </div>
         )
     }
