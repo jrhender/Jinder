@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ProfileModal extends React.Component {
 
@@ -83,9 +84,9 @@ class ProfileModal extends React.Component {
 }
 
 ProfileModal.propTypes = {
-  closeModal: React.PropTypes.func.isRequired,
-  profileText: React.PropTypes.string,
-  show: React.PropTypes.bool
+  closeModal: PropTypes.func.isRequired,
+  profileText: PropTypes.string,
+  show: PropTypes.bool
 };
 
 export default ProfileModal;

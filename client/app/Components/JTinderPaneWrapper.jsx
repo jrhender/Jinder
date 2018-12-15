@@ -198,13 +198,16 @@ class JTinderPaneWrapper extends React.Component {
                     onTouchEnd={this.mouseup.bind(this)}
                 >
                 <Measure
-                    onMeasure={(dimensions) => {
-                        this.setState({dimensions})
+                    bounds
+                    onResize={(contentRect) => {
+                        this.setState({dimensions: contentRect.bounds})
                     }}
                 >
-                    <ul>
-                        {panes}
-                    </ul>
+                    {({ contentRect, measureRef }) =>
+                        <ul ref={measureRef}>
+                            {panes}
+                        </ul>
+                    }
                 </Measure>
                 </div>
                 </div>

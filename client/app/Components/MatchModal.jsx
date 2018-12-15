@@ -1,5 +1,5 @@
 import React from 'react';
-import paneImageService from '../Services/paneImageService';
+import PropTypes from 'prop-types';
 
 class MatchModal extends React.Component {
 
@@ -70,9 +70,9 @@ class MatchModal extends React.Component {
 }
 
 MatchModal.propTypes = {
-  onClose: React.PropTypes.func.isRequired,
-  show: React.PropTypes.bool,
-  imageUrl: React.PropTypes.string
+  onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  imageUrl: PropTypes.string
 };
 
 export default MatchModal;

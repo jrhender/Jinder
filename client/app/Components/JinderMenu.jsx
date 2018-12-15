@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { slide as Menu } from 'react-burger-menu';
 
 const JinderMenu = (props) => {
@@ -51,8 +52,8 @@ var menuStyles = {
 }
 
 JinderMenu.propTypes = {
-  navigateToSetupArea: React.PropTypes.func,
-  navigateToJinderArea: React.PropTypes.func
+  navigateToSetupArea: PropTypes.func,
+  navigateToJinderArea: PropTypes.func
 }
 
 export default JinderMenu;
