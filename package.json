@@ -20,12 +20,14 @@
     "react": "^15.4.2",
     "react-burger-menu": "^2.5.4",
     "react-dom": "^15.4.2",
+    "react-firebase-file-uploader": "^2.4.2",
     "react-firebaseui": "^3.1.2",
     "react-measure": "^1.4.6",
     "react-motion": "^0.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
     "ts-loader": "^5.3.0",
