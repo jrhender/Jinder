@@ -36,9 +36,29 @@ const getImagesOfCurrentUser = () => {
     });
 }
 
+const addNewPaneImage = (downloadUrlOfNewImage : string) => {
+    let currentUserID : string = firebase.auth().currentUser.uid;
+    let jinderImagesRef = firestoreDB.collection("JinderImages");
+    return new Promise<string[]>((resolve, reject) => {
+        jinderImagesRef.add({
+            ImageUrl: downloadUrlOfNewImage,
+            UserID: currentUserID
+        })
+        .then((docRef : any) => {
+            console.log("Document written with ID: ", docRef.id);
+            return resolve()
+        })
+        .catch((error : string) => {
+            console.log("Error creating PaneImage record: ", error);
+            return reject("Error creating PaneImage record: " + error);
+        });
+    });
+}
+
 const paneImageService = {
     getPaneImageUrl,
-    getImagesOfCurrentUser
+    getImagesOfCurrentUser,
+    addNewPaneImage
 }
 
 export default paneImageService;

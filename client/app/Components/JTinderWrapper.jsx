@@ -18,13 +18,12 @@ class JTinderWrapper extends React.Component {
         if(this.state.imagesAreLoaded === false) {
             paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
                 if(returnedImageUrls.length > 0) {
+                    this.paneCount = returnedImageUrls.length;
                     this.initializingArray = [];
                     for(let i =0; i < this.paneCount; i++ ){
                         this.initializingArray.push(0);
                     }
 
-                    this.paneCount = returnedImageUrls.length;
-                    
                     this.setState({
                         imageUrls: returnedImageUrls,
                         currentPane: this.paneCount - 1,
@@ -48,6 +47,7 @@ class JTinderWrapper extends React.Component {
         let newLikeStatusArray = this.getNewLikeStatusArray();
         this.setState((prevState) => {
             return {
+                previousPane : prevState.currentPane,
                 currentPane : paneNumberOfNewCurrentPane,
                 likeStatusArray : newLikeStatusArray,
                 likeModalIsOpen: true
@@ -60,6 +60,7 @@ class JTinderWrapper extends React.Component {
         let newLikeStatusArray = this.getNewLikeStatusArray();
         this.setState((prevState) => {
             return {
+                previousPane : prevState.currentPane,
                 currentPane : paneNumberOfNewCurrentPane,
                 likeStatusArray : newLikeStatusArray,
             }
@@ -113,9 +114,8 @@ class JTinderWrapper extends React.Component {
                         <MatchModal 
                             show={this.state.likeModalIsOpen}
                             onClose={this.toggleModal.bind(this)}
-                            currentPane={this.state.currentPane+1}
                             imageUrl = {this.state.imageUrls != undefined ? 
-                                this.state.imageUrls[this.state.currentPane] : ""}                        
+                                this.state.imageUrls[this.state.previousPane] : ""}                        
                         />
                     </div>
                 )
