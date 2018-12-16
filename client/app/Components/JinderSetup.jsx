@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
+import JinderPaneImageList from './JinderPaneImageList.jsx';
 
 class JinderSetup extends React.Component {
     state = {
@@ -46,7 +47,7 @@ class JinderSetup extends React.Component {
                     />
                     <label>Avatar:</label>
                     {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                    {this.state.avatarURL && <img src={this.state.avatarURL} />}
+                    {/* {this.state.avatarURL && <img src={this.state.avatarURL} />} */}
                     <FileUploader
                         accept="image/*"
                         name="avatar"
@@ -57,6 +58,7 @@ class JinderSetup extends React.Component {
                         onUploadSuccess={this.handleUploadSuccess}
                         onProgress={this.handleProgress}
                     />
+                    {this.state.avatarURL && <JinderPaneImageList imageUrls={[this.state.avatarURL]}/>}
                 </form>
             </div>
         );
