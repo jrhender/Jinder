@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import JinderPaneImageList from './JinderPaneImageList.jsx';
+import paneImageService from '../Services/paneImageService';
 
 class JinderSetup extends React.Component {
     state = {
@@ -9,8 +10,29 @@ class JinderSetup extends React.Component {
         avatar: "",
         isUploading: false,
         progress: 0,
-        avatarURL: ""
+        avatarURL: "",
+        imagesAreLoaded: false,
+        imageUrls : []
     };
+
+    componentDidMount() {
+        if(this.state.imagesAreLoaded === false) {
+            paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
+                if(returnedImageUrls.length > 0) {
+                    this.setState({
+                        imageUrls: returnedImageUrls,
+                        imagesAreLoaded : true
+                    });
+                }
+                else
+                {
+                    this.setState({
+                        imagesAreLoaded : true
+                    });
+                }
+            });
+        }
+    }
 
     handleChangeUsername = event =>
         this.setState({ username: event.target.value });
@@ -31,7 +53,9 @@ class JinderSetup extends React.Component {
             .ref("images")
             .child(filename)
             .getDownloadURL()
-            .then(url => this.setState({ avatarURL: url }));
+            .then(url => this.setState((prevState) => { 
+                return {imageUrls: [...prevState.imageUrls, url]} 
+            }));
     };
 
     render() {
@@ -58,7 +82,7 @@ class JinderSetup extends React.Component {
                         onUploadSuccess={this.handleUploadSuccess}
                         onProgress={this.handleProgress}
                     />
-                    {this.state.avatarURL && <JinderPaneImageList imageUrls={[this.state.avatarURL]}/>}
+                    {this.state.imagesAreLoaded && <JinderPaneImageList imageUrls={this.state.imageUrls}/>}
                 </form>
             </div>
         );

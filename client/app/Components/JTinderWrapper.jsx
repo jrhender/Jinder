@@ -7,8 +7,8 @@ import paneImageService from '../Services/paneImageService';
 
 class JTinderWrapper extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             imagesAreLoaded : false
         };

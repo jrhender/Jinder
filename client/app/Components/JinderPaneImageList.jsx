@@ -32,12 +32,12 @@ class JinderPaneImagesList extends React.Component {
   render() {
     return (
       <List dense>
-        {[0, 1, 2, 3].map(value => (
-          <ListItem key={value} button>
+        {this.props.imageUrls.map((value, index) => (
+          <ListItem key={index} button>
             <ListItemAvatar>
               <Avatar
-                alt={`Avatar n°${value + 1}`}
-                src={this.props.imageUrls[0]}
+                alt={`Avatar n°${index + 1}`}
+                src={this.props.imageUrls[index]}
               />
             </ListItemAvatar>
             {/* <ListItemText primary={`Line item ${value + 1}`} />
