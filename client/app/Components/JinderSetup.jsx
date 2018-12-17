@@ -67,16 +67,7 @@ class JinderSetup extends React.Component {
         return (
             <div>
                 <form>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={this.state.username}
-                        name="username"
-                        onChange={this.handleChangeUsername}
-                    />
-                    <label>Avatar:</label>
                     {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                    {/* {this.state.avatarURL && <img src={this.state.avatarURL} />} */}
                     <FileUploader
                         accept="image/*"
                         name="avatar"
