@@ -26,22 +26,22 @@ var menuStyles = {
   },
   bmCrossButton: {
     height: '24px',
-    width: '24px'
+    width: '36px'
   },
   bmCross: {
     background: '#bdc3c7'
   },
   bmMenu: {
-    background: '#373a47',
-    padding: '2.5em 1.5em 0',
-    fontSize: '1.15em'
+    background: '#133337',
+    padding: '2.5em 1em 0',
+    fontSize: '1.5em'
   },
   bmMorphShape: {
-    fill: '#373a47'
+    fill: '#FFFFFF'
   },
   bmItemList: {
-    color: '#b8b7ad',
-    padding: '0.8em'
+    color: '#FFFFFF',
+    padding: '0.5em'
   },
   bmItem: {
     display: 'block'
