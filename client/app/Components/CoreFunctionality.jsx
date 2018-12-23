@@ -2,6 +2,7 @@ import React from 'react';
 import JinderMenu from './JinderMenu.jsx';
 import JinderSetup from './JinderSetup.jsx';
 import JTinderWrapper from './JTinderWrapper.jsx';
+import Logout from './Logout.jsx';
 
 class CoreFunctionality extends React.Component {
     constructor(props) {
@@ -41,6 +42,9 @@ class CoreFunctionality extends React.Component {
                         <div> 
                             <JTinderWrapper/>
                         </div>
+                        <div>
+                            <Logout/>
+                        </div>
                     </div>
                 )
             }
@@ -56,12 +60,15 @@ class CoreFunctionality extends React.Component {
                         <div style={{marginTop: '100px'}}> 
                             <JinderSetup/>
                         </div>
+                        <div>
+                            <Logout/>
+                        </div>
                     </div>
                 )
             }
             else {
                 return (
-                    <p>You've navigated to a magically mystery area :O</p>
+                    <p>You've navigated to a magical mystery area :O</p>
                 )
             }
         }
