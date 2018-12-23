@@ -54,7 +54,7 @@ class JinderSetup extends React.Component {
             .child(filename)
             .getDownloadURL()
             .then(url => 
-                paneImageService.addNewPaneImage(url)
+                paneImageService.addNewPaneImage(url, filename)
                 .then(
                     this.setState((prevState) => { 
                         return {imageUrls: [...prevState.imageUrls, url]} 

@@ -36,13 +36,14 @@ const getImagesOfCurrentUser = () => {
     });
 }
 
-const addNewPaneImage = (downloadUrlOfNewImage : string) => {
+const addNewPaneImage = (downloadUrlOfNewImage : string, fileName : string) => {
     let currentUserID : string = firebase.auth().currentUser.uid;
     let jinderImagesRef = firestoreDB.collection("JinderImages");
     return new Promise<string[]>((resolve, reject) => {
         jinderImagesRef.add({
             ImageUrl: downloadUrlOfNewImage,
-            UserID: currentUserID
+            UserID: currentUserID,
+            FileName: fileName
         })
         .then((docRef : any) => {
             console.log("Document written with ID: ", docRef.id);
