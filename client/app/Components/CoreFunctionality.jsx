@@ -53,7 +53,7 @@ class CoreFunctionality extends React.Component {
                                 navigateToSetupArea={this.navigateToSetupArea}
                             />  
                         </div>
-                        <div> 
+                        <div style={{marginTop: '100px'}}> 
                             <JinderSetup/>
                         </div>
                     </div>

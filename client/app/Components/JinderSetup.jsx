@@ -66,20 +66,19 @@ class JinderSetup extends React.Component {
     render() {
         return (
             <div>
-                <form>
-                    {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                    <FileUploader
-                        accept="image/*"
-                        name="avatar"
-                        randomizeFilename
-                        storageRef={firebase.storage().ref("images")}
-                        onUploadStart={this.handleUploadStart}
-                        onUploadError={this.handleUploadError}
-                        onUploadSuccess={this.handleUploadSuccess}
-                        onProgress={this.handleProgress}
-                    />
-                    {this.state.imagesAreLoaded && <JinderPaneImageList imageUrls={this.state.imageUrls}/>}
-                </form>
+                <h2>Manage your images</h2>
+                {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+                <FileUploader
+                    accept="image/*"
+                    name="avatar"
+                    randomizeFilename
+                    storageRef={firebase.storage().ref("images")}
+                    onUploadStart={this.handleUploadStart}
+                    onUploadError={this.handleUploadError}
+                    onUploadSuccess={this.handleUploadSuccess}
+                    onProgress={this.handleProgress}
+                />
+                {this.state.imagesAreLoaded && <JinderPaneImageList imageUrls={this.state.imageUrls}/>}
             </div>
         );
     }
