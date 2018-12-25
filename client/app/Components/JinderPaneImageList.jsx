@@ -7,6 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
+import DeleteIcon from '@material-ui/icons/Delete';
+import paneImageService from '../Services/paneImageService';
 
 class JinderPaneImagesList extends React.Component {
   state = {
@@ -29,24 +31,29 @@ class JinderPaneImagesList extends React.Component {
     });
   };
 
+  deleteIcon = imageName => {
+    paneImageService.deletePaneImage(imageName)
+  }
+
   render() {
     return (
       <List dense>
-        {this.props.imageUrls.map((value, index) => (
+        {this.props.images.map((value, index) => (
           <ListItem key={index} button>
             <ListItemAvatar>
               <Avatar
                 alt={`Avatar n°${index + 1}`}
-                src={this.props.imageUrls[index]}
+                src={this.props.images[index].imageUrl}
               />
             </ListItemAvatar>
-            {/* <ListItemText primary={`Line item ${value + 1}`} />
+            {/* <ListItemText primary={`Line item ${value + 1}`} /> */}
             <ListItemSecondaryAction>
-              <Checkbox
+              {/* <Checkbox
                 onChange={this.handleToggle(value)}
                 checked={this.state.checked.indexOf(value) !== -1}
-              />
-            </ListItemSecondaryAction> */}
+              /> */}
+              <DeleteIcon onClick={this.props.deleteImage}/> 
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>
@@ -56,7 +63,8 @@ class JinderPaneImagesList extends React.Component {
 
 JinderPaneImagesList.propTypes = {
   classes: PropTypes.object,
-  imageUrls: PropTypes.arrayOf(PropTypes.string)
+  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteImage: PropTypes.func.isRequired
 };
 
 export default JinderPaneImagesList;

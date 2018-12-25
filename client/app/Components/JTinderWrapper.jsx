@@ -16,16 +16,16 @@ class JTinderWrapper extends React.Component {
 
     componentDidMount() {
         if(this.state.imagesAreLoaded === false) {
-            paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
-                if(returnedImageUrls.length > 0) {
-                    this.paneCount = returnedImageUrls.length;
+            paneImageService.getImagesOfCurrentUser().then((images) => {
+                if(images.length > 0) {
+                    this.paneCount = images.length;
                     this.initializingArray = [];
                     for(let i =0; i < this.paneCount; i++ ){
                         this.initializingArray.push(0);
                     }
 
                     this.setState({
-                        imageUrls: returnedImageUrls,
+                        images: images,
                         currentPane: this.paneCount - 1,
                         // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
                         likeStatusArray : this.initializingArray,
@@ -109,13 +109,13 @@ class JTinderWrapper extends React.Component {
                             likeStatusArray={this.state.likeStatusArray}
                             updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                             updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                            imageUrls = {this.state.imageUrls}
+                            imageUrls = {this.state.images ? this.state.images.map(x => x.imageUrl) : []}
                         />
                         <MatchModal 
                             show={this.state.likeModalIsOpen}
                             onClose={this.toggleModal.bind(this)}
-                            imageUrl = {this.state.imageUrls != undefined ? 
-                                this.state.imageUrls[this.state.previousPane] : ""}                        
+                            imageUrl = {this.state.images[this.state.previousPane] != undefined ? 
+                                this.state.images[this.state.previousPane].imageUrl : ""}                        
                         />
                     </div>
                 )

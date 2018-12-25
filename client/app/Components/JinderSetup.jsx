@@ -12,15 +12,15 @@ class JinderSetup extends React.Component {
         progress: 0,
         avatarURL: "",
         imagesAreLoaded: false,
-        imageUrls : []
+        images : []
     };
 
     componentDidMount() {
         if(this.state.imagesAreLoaded === false) {
-            paneImageService.getImagesOfCurrentUser().then((returnedImageUrls) => {
-                if(returnedImageUrls.length > 0) {
+            paneImageService.getImagesOfCurrentUser().then((returnedImages) => {
+                if(returnedImages.length > 0) {
                     this.setState({
-                        imageUrls: returnedImageUrls,
+                        images: returnedImages,
                         imagesAreLoaded : true
                     });
                 }
@@ -55,13 +55,34 @@ class JinderSetup extends React.Component {
             .getDownloadURL()
             .then(url => 
                 paneImageService.addNewPaneImage(url, filename)
-                .then(
+                .then(() => {
+                    let newPaneImage = {
+                        imageUrl : url,
+                        fileName : filename
+                    };
                     this.setState((prevState) => { 
-                        return {imageUrls: [...prevState.imageUrls, url]} 
+                        return {
+                            images: [...prevState.images, newPaneImage],
+                        } 
                     })
-                )
+                })
             );
     };
+
+    deleteImage = imageName => {
+        paneImageService.deletePaneImage(imageName)
+            .then(() => {
+                indexOfImageToRemove = images.map(x => x.fileName).indexOf(imageName);
+                this.setState((prevState) => { 
+                    return {
+                        images: prevState.images.splice(indexOfImageToRemove, 1),
+                    } 
+                })
+            })
+            .catch((error) => {
+                console.log("error deleting image " + error);
+            })
+    }
 
     render() {
         return (
@@ -78,7 +99,8 @@ class JinderSetup extends React.Component {
                     onUploadSuccess={this.handleUploadSuccess}
                     onProgress={this.handleProgress}
                 />
-                {this.state.imagesAreLoaded && <JinderPaneImageList imageUrls={this.state.imageUrls}/>}
+                {this.state.imagesAreLoaded 
+                    && <JinderPaneImageList images={this.state.images} deleteImage={this.deleteImage}/>}
             </div>
         );
     }
