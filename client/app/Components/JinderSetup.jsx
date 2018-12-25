@@ -3,6 +3,7 @@ import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 import JinderPaneImageList from './JinderPaneImageList.jsx';
 import paneImageService from '../Services/paneImageService';
+import {IceCream} from 'react-kawaii';
 
 class JinderSetup extends React.Component {
     state = {
@@ -88,17 +89,23 @@ class JinderSetup extends React.Component {
         return (
             <div>
                 <h2>Manage your images</h2>
-                {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                <FileUploader
-                    accept="image/*"
-                    name="avatar"
-                    randomizeFilename
-                    storageRef={firebase.storage().ref("images")}
-                    onUploadStart={this.handleUploadStart}
-                    onUploadError={this.handleUploadError}
-                    onUploadSuccess={this.handleUploadSuccess}
-                    onProgress={this.handleProgress}
-                />
+                <div style={{margin: '50px'}}>
+                    <span>Only have upload at the moment. More functionality coming soon!</span>
+                    <IceCream size={50} mood="lovestruck" color="#FDA7DC" />
+                </div>
+                <div>
+                    {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+                    <FileUploader
+                        accept="image/*"
+                        name="avatar"
+                        randomizeFilename
+                        storageRef={firebase.storage().ref("images")}
+                        onUploadStart={this.handleUploadStart}
+                        onUploadError={this.handleUploadError}
+                        onUploadSuccess={this.handleUploadSuccess}
+                        onProgress={this.handleProgress}
+                    />
+                </div>
                 {this.state.imagesAreLoaded 
                     && <JinderPaneImageList images={this.state.images} deleteImage={this.deleteImage}/>}
             </div>
