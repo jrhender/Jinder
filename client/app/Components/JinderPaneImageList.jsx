@@ -47,13 +47,13 @@ class JinderPaneImagesList extends React.Component {
               />
             </ListItemAvatar>
             {/* <ListItemText primary={`Line item ${value + 1}`} /> */}
-            <ListItemSecondaryAction>
+            {/* <ListItemSecondaryAction>
               {/* <Checkbox
                 onChange={this.handleToggle(value)}
                 checked={this.state.checked.indexOf(value) !== -1}
-              /> */}
+              />
               <DeleteIcon onClick={this.props.deleteImage}/> 
-            </ListItemSecondaryAction>
+            </ListItemSecondaryAction> */}
           </ListItem>
         ))}
       </List>
