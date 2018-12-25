@@ -14,3 +14,7 @@ A web app for personalized swiping and liking
 ## Dev Notes
 
 *   Can analyze bundle-size using WebpackBundleAnalyzer by building using the webpack.dev config (e.g. by running npm-start). For more info, see [this hackernoon post](https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579).
+
+## Deployment
+
+Deployed using Netlify
