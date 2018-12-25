@@ -58,7 +58,7 @@ class MatchModal extends React.Component {
             </p>
           </div>
           <h2>It's a match!</h2>
-          <h3>You and John have liked each-other</h3>
+          <h3>You have liked each-other</h3>
           <div>
               <img className="img-circle" src="img/pane/matchFace.jpg" style={imgCircle}/>
               <img className="img-circle" src={this.props.imageUrl ? this.props.imageUrl : ""} style={imgCircle}/>
