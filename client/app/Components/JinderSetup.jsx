@@ -90,7 +90,7 @@ class JinderSetup extends React.Component {
             <div>
                 <h2>Manage your images</h2>
                 <div style={{margin: '50px'}}>
-                    <span>Only have upload at the moment. More functionality coming soon!</span>
+                    <h4>Only have upload at the moment. More functionality coming soon!</h4>
                     <IceCream size={50} mood="lovestruck" color="#FDA7DC" />
                 </div>
                 <div>

@@ -123,7 +123,7 @@ class JTinderWrapper extends React.Component {
                 return (
                     <div>
                         <SpeechBubble size={170} mood="sad" color="#83D1FB" />
-                        <p>You have no love options :(</p>
+                        <h3>You have no love options :(</h3>
                     </div>
                 )
             }
@@ -132,7 +132,7 @@ class JTinderWrapper extends React.Component {
             return (
                 <div>
                     <SpeechBubble size={150} mood="happy" color="#83D1FB" />
-                    <p>Profiles have not loaded yet... please wait</p>
+                    <h3>Profiles have not loaded yet... please wait</h3>
                 </div>
             )
         }
