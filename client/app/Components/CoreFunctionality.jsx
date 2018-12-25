@@ -39,7 +39,7 @@ class CoreFunctionality extends React.Component {
                                 navigateToSetupArea={this.navigateToSetupArea}
                             />  
                         </div>
-                        <div> 
+                        <div style={{marginTop: '50px'}}> 
                             <JTinderWrapper/>
                         </div>
                         <div>

@@ -41,7 +41,7 @@ class Login extends React.Component {
     render() {
         if (!this.props.isSignedIn) {
             return (
-            <div>
+            <div style={{marginTop: '100px'}}>
                 <h1 style={loginStyle}>Welcome To Jinder!</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
             </div>
