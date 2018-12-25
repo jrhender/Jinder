@@ -1,9 +1,8 @@
 import React from 'react';
-
 import JTinderPaneWrapper from './JTinderPaneWrapper.jsx';
 import MatchModal from './MatchModal.jsx';
-
 import paneImageService from '../Services/paneImageService';
+import {SpeechBubble} from 'react-kawaii';
 
 class JTinderWrapper extends React.Component {
 
@@ -123,6 +122,7 @@ class JTinderWrapper extends React.Component {
             else {
                 return (
                     <div>
+                        <SpeechBubble size={170} mood="sad" color="#83D1FB" />
                         <p>You have no love options :(</p>
                     </div>
                 )
@@ -131,7 +131,8 @@ class JTinderWrapper extends React.Component {
         else{
             return (
                 <div>
-                    <p>Profiles have not loaded yet... (wannabe loading gif)</p>
+                    <SpeechBubble size={150} mood="happy" color="#83D1FB" />
+                    <p>Profiles have not loaded yet... please wait</p>
                 </div>
             )
         }

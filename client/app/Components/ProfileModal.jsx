@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Mug} from 'react-kawaii';
 
 class ProfileModal extends React.Component {
 
@@ -76,7 +77,9 @@ class ProfileModal extends React.Component {
           <p onClick={this.props.closeModal} style={{fontWeight: "bold", cursor: "pointer", textAlign: 'right' }}>
             X
           </p>
-          <h3>{this.getProfileText()}</h3>
+          {/* <h3>{this.getProfileText()}</h3> */}
+          <Mug size={200} mood="excited" color="#A6E191" />
+          <h3>Profile functionality currently being brewed. Will be served soon!</h3>
         </div>
       </div>
     );
