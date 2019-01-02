@@ -276,4 +276,4 @@ __pycache__/
 
 stats.json
 client/public/scripts/*
-
+.stats.json.icloud
