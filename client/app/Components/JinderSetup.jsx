@@ -18,7 +18,7 @@ class JinderSetup extends React.Component {
 
     componentDidMount() {
         if(this.state.imagesAreLoaded === false) {
-            paneImageService.getImagesOfCurrentUser().then((returnedImages) => {
+            paneImageService.getProfileImagesOfCurrentUser().then((returnedImages) => {
                 if(returnedImages.length > 0) {
                     this.setState({
                         images: returnedImages,

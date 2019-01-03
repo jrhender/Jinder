@@ -60,7 +60,7 @@ class MatchModal extends React.Component {
           <h2>It's a match!</h2>
           <h3>You have liked each-other</h3>
           <div>
-              <img className="img-circle" src="img/yourock.png" style={imgCircle}/>
+              <img className="img-circle" src={this.props.profileImageUrl ? this.props.profileImageUrl : ""} style={imgCircle}/>
               <img className="img-circle" src={this.props.imageUrl ? this.props.imageUrl : ""} style={imgCircle}/>
           </div>   
         </div>
@@ -72,7 +72,8 @@ class MatchModal extends React.Component {
 MatchModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
-  imageUrl: PropTypes.string
+  imageUrl: PropTypes.string,
+  profileImageUrl: PropTypes.string
 };
 
 export default MatchModal;

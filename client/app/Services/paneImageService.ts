@@ -16,10 +16,10 @@ const getPaneImageUrl = (paneNumber : number) => {
     return downloadURLPromise;
 }
 
-const getImagesOfCurrentUser = () => {
+const getProfileImagesOfCurrentUser = () => {
     let images : object[] = new Array();
     let currentUserID : string = firebase.auth().currentUser.uid;
-    let jinderImagesRef = firestoreDB.collection("JinderImages");
+    let jinderImagesRef = firestoreDB.collection("ProfileImages");
     let userImagesQuery = jinderImagesRef.where("UserID","==",currentUserID);
     return new Promise<object[]>((resolve, reject) => {
         userImagesQuery.get()
@@ -41,7 +41,7 @@ const getImagesOfCurrentUser = () => {
 
 const addNewPaneImage = (downloadUrlOfNewImage : string, fileName : string) => {
     let currentUserID : string = firebase.auth().currentUser.uid;
-    let jinderImagesRef = firestoreDB.collection("JinderImages");
+    let jinderImagesRef = firestoreDB.collection("ProfileImages");
     return new Promise<string[]>((resolve, reject) => {
         jinderImagesRef.add({
             ImageUrl: downloadUrlOfNewImage,
@@ -83,7 +83,7 @@ const deletePaneImage = (fileName : string) => {
 
 const paneImageService = {
     getPaneImageUrl,
-    getImagesOfCurrentUser,
+    getProfileImagesOfCurrentUser,
     addNewPaneImage,
     deletePaneImage
 }

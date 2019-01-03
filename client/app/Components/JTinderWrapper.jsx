@@ -15,7 +15,7 @@ class JTinderWrapper extends React.Component {
 
     componentDidMount() {
         if(this.state.imagesAreLoaded === false) {
-            paneImageService.getImagesOfCurrentUser().then((images) => {
+            paneImageService.getProfileImagesOfCurrentUser().then((images) => {
                 if(images.length > 0) {
                     this.paneCount = images.length;
                     this.initializingArray = [];
@@ -113,6 +113,8 @@ class JTinderWrapper extends React.Component {
                         <MatchModal 
                             show={this.state.likeModalIsOpen}
                             onClose={this.toggleModal.bind(this)}
+                            profileImageUrl = {this.state.images[0] != undefined ? 
+                                this.state.images[0].imageUrl : ""}  
                             imageUrl = {this.state.images[this.state.previousPane] != undefined ? 
                                 this.state.images[this.state.previousPane].imageUrl : ""}                        
                         />
@@ -123,7 +125,7 @@ class JTinderWrapper extends React.Component {
                 return (
                     <div>
                         <SpeechBubble size={170} mood="sad" color="#83D1FB" />
-                        <h3>You have no love options :(</h3>
+                        <h3>Please upload a profile image</h3>
                     </div>
                 )
             }
@@ -132,7 +134,7 @@ class JTinderWrapper extends React.Component {
             return (
                 <div>
                     <SpeechBubble size={150} mood="happy" color="#83D1FB" />
-                    <h3>Profiles have not loaded yet... please wait</h3>
+                    <h3>Your love has not loaded yet... please wait</h3>
                 </div>
             )
         }
