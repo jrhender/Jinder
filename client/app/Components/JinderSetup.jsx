@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
-import JinderPaneImageList from './JinderPaneImageList.jsx';
+import JinderProfileImage from './JinderProfileImage.jsx';
 import paneImageService from '../Services/paneImageService';
 import {IceCream} from 'react-kawaii';
 
@@ -106,8 +106,8 @@ class JinderSetup extends React.Component {
                         onProgress={this.handleProgress}
                     />
                 </div>
-                {this.state.imagesAreLoaded 
-                    && <JinderPaneImageList images={this.state.images} deleteImage={this.deleteImage}/>}
+                {this.state.imagesAreLoaded && this.state.images.length > 0
+                    && <JinderProfileImage imageUrl={this.state.images[0].imageUrl}/>}
             </div>
         );
     }
