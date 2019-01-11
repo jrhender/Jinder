@@ -4,9 +4,9 @@
   "description": "jinder app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,14 @@
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "^23.6.0",
     "react-measure": "^2.2.1",
+    "ts-jest": "^23.10.5",
     "ts-loader": "^5.3.0",
     "typescript": "^3.1.6",
     "webpack": "^4.23.1",
