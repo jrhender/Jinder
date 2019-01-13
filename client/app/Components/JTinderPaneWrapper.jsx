@@ -174,7 +174,7 @@ class JTinderPaneWrapper extends React.Component {
                     dislikeOpacity={this.state.dislikeOpacityArray[i]}
                     likeStatus={this.props.likeStatusArray[i]}
                     motionRestCallback={this.state.motionRestCallbackArray[i]}
-                    imageUrl = {this.props.imageUrls != undefined ? this.props.imageUrls[i] : ""} 
+                    imageUrl = {this.props.images != undefined ? this.props.images[i].imageUrl : ""} 
                 />
             );
         }
@@ -218,7 +218,7 @@ class JTinderPaneWrapper extends React.Component {
             {
                 //end padding container
             }
-            <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)} currentPane={this.props.currentPane}/>
+            <JTinderButtons handleLike={this.handleLike.bind(this)} handleDislike={this.handleDislike.bind(this)} profileText={this.props.images[this.props.currentPane].profileText}/>
         </div>
         );
     }

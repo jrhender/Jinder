@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Mug} from 'react-kawaii';
 
 class ProfileModal extends React.Component {
 
@@ -10,28 +9,6 @@ class ProfileModal extends React.Component {
 
   stopEventPropagation(e) {
     e.stopPropagation();
-  }
-
-  getProfileText() {
-    let currentPane = this.props.currentPane;
-    if(currentPane == 4) {
-        return "Nothing on his baby face is particularly pretty, but somehow it all just works together"
-    }
-    else if(currentPane == 3) {
-        return "He's smarter than two dumb guys!"
-    }
-    else if(currentPane == 2) {
-        return "He hates how intimidated people get when they see his muscular biceps."
-    }
-    else if(currentPane == 1) {
-        return "He oozes class from every pore. No wonder his face is shiny"
-    }
-    else if(currentPane == 0) {
-        return "Impossible to resist his unhinged joy!"
-    }
-    else {
-        return "What a mystery man..."
-    }
   }
 
   render() {
@@ -77,9 +54,7 @@ class ProfileModal extends React.Component {
           <p onClick={this.props.closeModal} style={{fontWeight: "bold", cursor: "pointer", textAlign: 'right' }}>
             X
           </p>
-          {/* <h3>{this.getProfileText()}</h3> */}
-          <Mug size={200} mood="excited" color="#A6E191" />
-          <h3>Profile functionality currently being brewed. Will be served soon!</h3>
+          <h3>{this.props.profileText}</h3>
         </div>
       </div>
     );
@@ -88,7 +63,7 @@ class ProfileModal extends React.Component {
 
 ProfileModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  profileText: PropTypes.string,
+  profileText: PropTypes.string.isRequired,
   show: PropTypes.bool
 };
 

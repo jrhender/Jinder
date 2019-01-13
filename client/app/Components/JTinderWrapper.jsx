@@ -129,7 +129,7 @@ class JTinderWrapper extends React.Component {
                             likeStatusArray={this.state.likeStatusArray}
                             updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                             updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                            imageUrls = {this.state.paneImages ? this.state.paneImages.map(x => x.imageUrl) : []}
+                            images = {this.state.paneImages ? this.state.paneImages : []}
                         />
                         <MatchModal 
                             show={this.state.likeModalIsOpen}

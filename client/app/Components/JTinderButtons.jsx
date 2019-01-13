@@ -28,7 +28,7 @@ class JTinderButtons extends React.Component {
                     <div className="dislike"><img onClick={this.props.handleDislike} src="img/dislike_button.png"/></div>
                     <div className="like"><img onClick={this.props.handleLike} src="img/like_button.png"/></div>
                 </div>
-                <ProfileModal currentPane={this.props.currentPane} closeModal={this.toggleModal} show={this.state.profileModalIsOpen}/>
+                <ProfileModal profileText={this.props.profileText} closeModal={this.toggleModal} show={this.state.profileModalIsOpen}/>
             </div>
         )
                                 

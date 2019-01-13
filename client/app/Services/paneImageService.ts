@@ -83,7 +83,6 @@ const deletePaneImage = (fileName : string) => {
 }
 
 const paneImageService = {
-    getPaneImageUrl,
     getProfileImagesOfCurrentUser,
     addNewPaneImage,
     deletePaneImage,
