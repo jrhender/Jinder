@@ -16,27 +16,43 @@ const getPaneImageUrl = (paneNumber : number) => {
     return downloadURLPromise;
 }
 
-const getProfileImagesOfCurrentUser = () => {
+const getProfileImagesOfCurrentUser = async () => {
     let images : object[] = new Array();
     let currentUserID : string = firebase.auth().currentUser.uid;
     let jinderImagesRef = firestoreDB.collection("ProfileImages");
     let userImagesQuery = jinderImagesRef.where("UserID","==",currentUserID);
-    return new Promise<object[]>((resolve, reject) => {
-        userImagesQuery.get()
-            .then((querySnapshop : any) => {
-                querySnapshop.forEach((doc : any) => {
-                    images.push({
-                        imageUrl : doc.data().ImageUrl,
-                        fileName : doc.data().FileName
-                    });
-                })
-                return resolve(images)
-            })
-            .catch((error : string) => {
-                console.log("Error getting documents: ", error);
-                return reject("Error getting documents: " + error);
-        });
-    });
+    try {
+        const querySnapshop = await userImagesQuery.get();
+        querySnapshop.forEach((doc : any) => {
+            images.push({
+                imageUrl : doc.data().ImageUrl,
+                fileName : doc.data().FileName
+            });
+        })
+        return images;
+    }
+    catch (error) {
+        throw Error("Error getting profile images: " + error);
+    }
+}
+
+const getJohnImages = async () => {
+    let images : object[] = new Array();
+    let jinderImagesRef = firestoreDB.collection("PaneImages");
+    try {
+        const querySnapshop = await jinderImagesRef.get();
+        querySnapshop.forEach((doc : any) => {
+            images.push({
+                imageUrl : doc.data().ImageUrl,
+                fileName : doc.data().FileName,
+                profileText : doc.data().ProfileText
+            });
+        })
+        return images;
+    }
+    catch (error) {
+        throw Error("Error getting john images: " + error);
+    }
 }
 
 const addNewPaneImage = (downloadUrlOfNewImage : string, fileName : string) => {
@@ -85,7 +101,8 @@ const paneImageService = {
     getPaneImageUrl,
     getProfileImagesOfCurrentUser,
     addNewPaneImage,
-    deletePaneImage
+    deletePaneImage,
+    getJohnImages
 }
 
 export default paneImageService;

@@ -13,31 +13,35 @@ class JTinderWrapper extends React.Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(this.state.imagesAreLoaded === false) {
-            paneImageService.getProfileImagesOfCurrentUser().then((images) => {
-                if(images.length > 0) {
-                    this.paneCount = images.length;
-                    this.initializingArray = [];
-                    for(let i =0; i < this.paneCount; i++ ){
-                        this.initializingArray.push(0);
-                    }
+            const profileImagesPromise =  paneImageService.getProfileImagesOfCurrentUser();
+            const jinderImagesPromise = paneImageService.getJohnImages();
+            const profileImages = await profileImagesPromise;
+            const jinderImages = await jinderImagesPromise;
 
-                    this.setState({
-                        images: images,
-                        currentPane: this.paneCount - 1,
-                        // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
-                        likeStatusArray : this.initializingArray,
-                        imagesAreLoaded : true
-                    });
+            if(jinderImages.length > 0) {
+                this.paneCount = jinderImages.length;
+                this.initializingArray = [];
+                for(let i =0; i < this.paneCount; i++ ){
+                    this.initializingArray.push(0);
                 }
-                else
-                {
-                    this.setState({
-                        imagesAreLoaded : true
-                    });
-                }
-            });
+
+                this.setState({
+                    paneImages : jinderImages,
+                    profileImages : profileImages,
+                    currentPane : this.paneCount - 1,
+                    // likeStatusArray possible statuses: 0->neutral, -1->disliked, 1->liked
+                    likeStatusArray : this.initializingArray,
+                    imagesAreLoaded : true
+                });
+            }
+            else
+            {
+                this.setState({
+                    imagesAreLoaded : true
+                });
+            }
         }
     }
 
@@ -98,7 +102,24 @@ class JTinderWrapper extends React.Component {
 
     render () {
         if(this.state.imagesAreLoaded){
-            if(this.paneCount > 0) {
+            if(this.state.profileImages.length <= 0) {
+                return (
+                    <div>
+                        <SpeechBubble size={170} mood="sad" color="#83D1FB" />
+                        <h3>Please upload a profile image</h3>
+                    </div>
+                )
+            }
+            else if(this.state.paneImages.length <= 0)
+            {
+                return (
+                    <div>
+                        <SpeechBubble size={170} mood="sad" color="#83D1FB" />
+                        <h3>We weren't able to load the John images due to a beauty overload</h3>
+                    </div>
+                )
+            }
+            else {
                 return (
                     <div className="customStyle">
                         <JTinderPaneWrapper 
@@ -108,24 +129,16 @@ class JTinderWrapper extends React.Component {
                             likeStatusArray={this.state.likeStatusArray}
                             updatePaneStatusForLike = {this.updatePaneStatusForLike.bind(this)}
                             updatePaneStatusForDislike = {this.updatePaneStatusForDislike.bind(this)}
-                            imageUrls = {this.state.images ? this.state.images.map(x => x.imageUrl) : []}
+                            imageUrls = {this.state.paneImages ? this.state.paneImages.map(x => x.imageUrl) : []}
                         />
                         <MatchModal 
                             show={this.state.likeModalIsOpen}
                             onClose={this.toggleModal.bind(this)}
-                            profileImageUrl = {this.state.images[0] != undefined ? 
-                                this.state.images[0].imageUrl : ""}  
-                            imageUrl = {this.state.images[this.state.previousPane] != undefined ? 
-                                this.state.images[this.state.previousPane].imageUrl : ""}                        
+                            profileImageUrl = {this.state.profileImages[0] != undefined ? 
+                                this.state.profileImages[0].imageUrl : ""}  
+                            imageUrl = {this.state.paneImages[this.state.previousPane] != undefined ? 
+                                this.state.paneImages[this.state.previousPane].imageUrl : ""}                        
                         />
-                    </div>
-                )
-            }
-            else {
-                return (
-                    <div>
-                        <SpeechBubble size={170} mood="sad" color="#83D1FB" />
-                        <h3>Please upload a profile image</h3>
                     </div>
                 )
             }
