@@ -15,4 +15,14 @@ describe('JinderProfileImage', () => {
       wrapper.unmount();
     });
   });
+
+  describe('when imageUrl is null', () => {
+    it('should render an explainer paragraph tag', () => {
+      const wrapper = mount(
+        <JinderProfileImage imageUrl={null}/>
+      );
+      expect(wrapper.contains(<p>No profile image</p>)).toEqual(true);
+      wrapper.unmount();
+    });
+  });
 });
