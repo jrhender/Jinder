@@ -1,16 +1,21 @@
 # Welcome to Jinder
 
-A web app for personalized swiping and liking
+A web app for personalized swiping and liking.
+
+## Release Notes
+
+01-2019: You can now upload your own profile image!
+12-2017: First release of Jinder onto the world!
 
 ## Credits
 
 *   This app's functionality was heavily inpired by the JTinder Jquery plugin. Check it out at https://github.com/do-web/jTinder 
-*   You rock image taken from https://dribbble.com/shots/3924724-You-Rock
 
 ## Technology used
 
 *   React
-*   Firebase
+*   Firebase for authentication, storage and DB
+*   Jest + Enzyme for testing
 
 ## Dev Notes
 
@@ -18,4 +23,4 @@ A web app for personalized swiping and liking
 
 ## Deployment
 
-Deployed using Netlify
+Deployed using Netlify. See the netlify.toml file for configuration.
