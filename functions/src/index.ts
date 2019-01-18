@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 
-import * as Storage from '@google-cloud/storage';
-const gcs = Storage();
+import {Storage} from '@google-cloud/storage';
+const gcs = new Storage();
 
 import { tmpdir } from 'os';
 import { join, dirname } from 'path';
@@ -12,9 +12,16 @@ import * as fs from 'fs-extra';
 export const generateThumbs = functions.storage
   .object()
   .onFinalize(async object => {
+    if(!object.contentType) { return false }
+
     const bucket = gcs.bucket(object.bucket);
+
     const filePath = object.name;
+    if(!filePath) { return false }
+
     const fileName = filePath.split('/').pop();
+    if(!fileName) { return false }
+
     const bucketDir = dirname(filePath);
 
     const workingDir = join(tmpdir(), 'thumbs');
