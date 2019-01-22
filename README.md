@@ -15,8 +15,10 @@ A web app for personalized swiping and liking.
 ## Technology used
 
 *   React
-*   Firebase for authentication, storage and DB
+*   Firebase for authentication, storage, DB and cloud function
 *   Jest + Enzyme for testing
+*   Typescript (only the service at the moment, not the react components)
+*   of course, Webpack & Babel for build
 
 ## Deployment
 
