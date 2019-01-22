@@ -8,11 +8,19 @@ const getProfileImagesOfCurrentUser = async () => {
     let userImagesQuery = jinderImagesRef.where("UserID","==",currentUserID);
     try {
         const querySnapshop = await userImagesQuery.get();
+        const storage = firebase.storage();
+        let imagePromises : Promise<string>[] = new Array();
+        querySnapshop.forEach((doc : any) => {
+            imagePromises.push(storage.ref('images/thumb@256_' + doc.data().FileName).getDownloadURL());
+        });
+        const imageDownloadUrls = await Promise.all<string>(imagePromises);
+        let index = 0;
         querySnapshop.forEach((doc : any) => {
             images.push({
-                imageUrl : doc.data().ImageUrl,
+                imageUrl : imageDownloadUrls[index],
                 fileName : doc.data().FileName
             });
+            index++;
         })
         return images;
     }
