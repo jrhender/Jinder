@@ -34,8 +34,7 @@ function App() {
   
   return (
     <div className="App">
-      <Advanced />
-      <button onClick={openModal}>Open Modal</button>
+      <Advanced onSwipeRight={openModal} />
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

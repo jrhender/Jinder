@@ -20,7 +20,7 @@ const db = [
   }
 ]
 
-function Advanced () {
+function Advanced (props: { onSwipeRight: any}) {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
   // used for outOfFrame closure
@@ -47,6 +47,9 @@ function Advanced () {
   const swiped = (direction: any, nameToDelete: any, index: any) => {
     setLastDirection(direction)
     updateCurrentIndex(index - 1)
+    if (direction === 'right') {
+      props.onSwipeRight();
+    }
   }
 
   const outOfFrame = (name: any, idx: any) => {
