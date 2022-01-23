@@ -43,7 +43,8 @@ function App() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <button onClick={closeModal}>close</button>
+        {/* <button style={{ 'backgroundColor': 'Transparent', border: 'none', margin: 'none' }}
+                onClick={closeModal}><h1>&#10006;</h1></button> */}
         <h1>If your name is Nicole... It's a match 😘
         </h1>
       </Modal>
