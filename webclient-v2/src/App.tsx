@@ -44,14 +44,8 @@ function App() {
         contentLabel="Example Modal"
       >
         <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        <h1>If your name is Nicole... It's a match 😘
+        </h1>
       </Modal>
     </div>
   );
