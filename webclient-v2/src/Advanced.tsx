@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useRef } from 'react'
-// import TinderCard from '../react-tinder-card/index'
 import TinderCard from 'react-tinder-card'
 
 const db = [
@@ -35,7 +34,7 @@ function Advanced () {
     []
   )
 
-  const updateCurrentIndex = (val) => {
+  const updateCurrentIndex = (val: any) => {
     setCurrentIndex(val)
     currentIndexRef.current = val
   }
@@ -45,22 +44,24 @@ function Advanced () {
   const canSwipe = currentIndex >= 0
 
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction: any, nameToDelete: any, index: any) => {
     setLastDirection(direction)
     updateCurrentIndex(index - 1)
   }
 
-  const outOfFrame = (name, idx) => {
+  const outOfFrame = (name: any, idx: any) => {
     console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
     // handle the case in which go back is pressed before card goes outOfFrame
+    // @ts-ignore
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
     // TODO: when quickly swipe and restore multiple times the same card,
     // it happens multiple outOfFrame events are queued and the card disappear
     // during latest swipes. Only the last outOfFrame event should be considered valid
   }
 
-  const swipe = async (dir) => {
+  const swipe = async (dir: any) => {
     if (canSwipe && currentIndex < db.length) {
+      // @ts-ignore
       await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
     }
   }
@@ -70,6 +71,7 @@ function Advanced () {
     if (!canGoBack) return
     const newIndex = currentIndex + 1
     updateCurrentIndex(newIndex)
+    // @ts-ignore
     await childRefs[newIndex].current.restoreCard()
   }
 
@@ -87,6 +89,7 @@ function Advanced () {
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
+            // @ts-ignore
             ref={childRefs[index]}
             className='swipe'
             key={character.name}
@@ -103,9 +106,9 @@ function Advanced () {
         ))}
       </div>
       <div className='buttons'>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-        <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
+        <button style={!canSwipe ? { backgroundColor: '#c3c4d3' }: {}} onClick={() => swipe('left')}>Swipe left!</button>
+        <button style={!canGoBack ? { backgroundColor:'#c3c4d3' }: {}} onClick={() => goBack()}>Undo swipe!</button>
+        <button style={!canSwipe ? { backgroundColor: '#c3c4d3' }: {}} onClick={() => swipe('right')}>Swipe right!</button>
       </div>
       {lastDirection ? (
         <h2 key={lastDirection} className='infoText'>
