@@ -11,6 +11,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    background: 'linear-gradient(#e66465, #9198e5)'
   },
 };
 
