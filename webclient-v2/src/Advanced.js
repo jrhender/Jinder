@@ -4,24 +4,20 @@ import TinderCard from 'react-tinder-card'
 
 const db = [
   {
-    name: 'Happy John',
-    url: './img/pane0.jpg'
+    name: 'Chef John',
+    url: './img/pie-john.jpeg'
   },
   {
-    name: 'Erlich Bachman',
-    url: './img/pane1.jpg'
+    name: 'Nature John',
+    url: './img/nature-john.jpeg'
   },
   {
-    name: 'Monica Hall',
-    url: './img/pane2.jpg'
+    name: 'Jazzy John',
+    url: './img/jazz-john.jpeg'
   },
   {
-    name: 'Jared Dunn',
-    url: './img/pane3.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: './img/pane4.jpg'
+    name: 'Jolly Old John',
+    url: './img/british-john.jpeg'
   }
 ]
 
@@ -101,7 +97,7 @@ function Advanced () {
               style={{ backgroundImage: 'url(' + character.url + ')' }}
               className='card'
             >
-              <h3>{character.name}</h3>
+              <h3>{character.name}, 29</h3>
             </div>
           </TinderCard>
         ))}
@@ -117,7 +113,6 @@ function Advanced () {
         </h2>
       ) : (
         <h2 className='infoText'>
-          Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}
     </div>
