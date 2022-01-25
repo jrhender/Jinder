@@ -88,7 +88,7 @@ function Advanced (props: { onSwipeRight: any}) {
         href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
         rel='stylesheet'
       />
-      <h1>Jinder</h1>
+      <h1>Jinder 2.0</h1>
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
