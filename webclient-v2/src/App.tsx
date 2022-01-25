@@ -15,6 +15,9 @@ const customStyles = {
   },
 };
 
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement(document.getElementById('root') ?? '');
+
 function App() {
   // let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
